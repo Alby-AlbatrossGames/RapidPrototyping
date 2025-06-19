@@ -1,9 +1,14 @@
+using BV;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using UnityEngine.Events;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : GameBehaviour
 {
+    public UnityEvent FreezeTime = null;
+
     public float speed = 5f;
     public Rigidbody playerRb;
     private GameObject fwdDirection;
@@ -46,7 +51,7 @@ public class PlayerController : MonoBehaviour
             Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), GetComponent<Collider>());
         }
 
-        if (transform.position.y < -30) { SceneManager.LoadScene("Prototype 4"); }
+        if (transform.position.y < -30) { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -86,6 +91,16 @@ public class PlayerController : MonoBehaviour
         playerMeshRenderer.material.color = visibleColor;
         enemyCollision = true;
     }
+
+    /*public void FreezeAbility()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            FreezeTime?.Invoke();
+            Debug.Log("Time Frozen");
+            //Set Enemy Momentum to 0 AND reduce speed, increasing back to normal over 5s
+        }
+    }*/
 
     private void OnCollisionEnter(Collision collision)
     {
