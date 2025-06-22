@@ -44,7 +44,7 @@ public class PlayerController : GameBehaviour
         playerRb.AddForce(fwdDirection.transform.forward * speed * forwardInput);
         playerRb.AddForce(fwdDirection.transform.right * speed * horizontalInput);
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
-        ghostIndicator.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+        ghostIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
 
         if (!enemyCollision)
         {
