@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class PlayerControl : GameBehaviour
 {
-    [SerializeField] private float maxSpeed = 20;
+    [SerializeField] private float maxSpeed;
+
+    private void Start()
+    {
+        maxSpeed = 20;
+    }
 
     #region Movement
     private void MoveUp() => MovePlayer(0, maxSpeed);

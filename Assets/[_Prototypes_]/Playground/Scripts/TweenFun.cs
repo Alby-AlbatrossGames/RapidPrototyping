@@ -13,7 +13,6 @@ public class TweenFun : GameBehaviour
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private int scoreBonus = 150;
     [SerializeField] private int score = 0;
-    [SerializeField] private float scoreTweenTime = 1.5f;
     [SerializeField] private Ease scoreEase;
 
     private void Update()

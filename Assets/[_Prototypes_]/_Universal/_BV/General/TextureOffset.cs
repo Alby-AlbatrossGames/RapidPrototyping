@@ -5,8 +5,10 @@ public class TextureOffset : MonoBehaviour
 {
     public float scrollX = 0.5f;
     public float scrollY = 0.5f;
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
     private Renderer renderer;
-    
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
+
     private void Awake()
     {
         renderer = GetComponent<Renderer>();
