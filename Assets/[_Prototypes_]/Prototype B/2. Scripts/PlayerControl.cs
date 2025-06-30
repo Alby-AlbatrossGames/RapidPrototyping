@@ -6,7 +6,7 @@ public class PlayerControl : GameBehaviour
 
     private void Start()
     {
-        maxSpeed = 20;
+        maxSpeed = 10;
     }
 
     #region Movement
