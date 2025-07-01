@@ -16,7 +16,7 @@ public class CardManager : MonoBehaviour
 
         for (int i = 0; i < cardData.Count; i++)
         {
-            GameObject newCard = Instantiate(cardPrefab, new Vector3(i + 2, 0, 0), transform.rotation);
+            GameObject newCard = Instantiate(cardPrefab, new Vector3(i*30 + 10, 0, 0), transform.rotation);
             newCard.GetComponent<Card>().Initialize(ListX.GetRandomItemFromList(cardData));
             cardsInHand.Add(newCard);
             yield return new WaitForSeconds(0.3f);
