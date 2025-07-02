@@ -1,4 +1,3 @@
-using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -9,8 +8,6 @@ namespace Prototype2
         [SerializeField] private float curBeeSpeed;
         [SerializeField] public float maxBeeSpeed = 7;
         [SerializeField] private float bumpTime;
-        //[SerializeField] private bool bumped = false;
-        [SerializeField] private bool speedingUp = false;
 
         private void Start()
         {
@@ -20,7 +17,6 @@ namespace Prototype2
         void Update()
         {
             MoveBee();
-
         }
 
         void MoveBee() => gameObject.transform.position += transform.forward * curBeeSpeed * Time.deltaTime;
@@ -42,13 +38,13 @@ namespace Prototype2
 
             yield return new WaitForSeconds(bumpTime);
             curBeeSpeed = maxBeeSpeed;
-
         }
 
         private void OnTriggerEnter(Collider other)
         {
             GameEvents.ReportOnBeeHitPlayer(this.gameObject);
-        }
+        } // Report OnBeeHitPlayer Event
+
         #region EventListeners
         private void OnEnable()
         {
