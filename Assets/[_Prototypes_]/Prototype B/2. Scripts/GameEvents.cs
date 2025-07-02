@@ -1,13 +1,17 @@
 using System;
 using UnityEngine;
 
-public class GameEvents : MonoBehaviour
+namespace Prototype2
 {
-    #region Enemy Bee
+    public class GameEvents : MonoBehaviour
+    {
+        #region Enemy Bee
 
-    public static event Action<GameObject> OnBeeHitPlayer = null;
+        public static event Action<GameObject> OnBeeHitPlayer = null;
 
-    public static void ReportOnBeeHitPlayer(GameObject _bee) => OnBeeHitPlayer?.Invoke(_bee);
+        public static void ReportOnBeeHitPlayer(GameObject _bee) => OnBeeHitPlayer?.Invoke(_bee);
 
-    #endregion Enemy Bee
+        #endregion Enemy Bee
+    }
 }
+
