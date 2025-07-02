@@ -1,7 +1,5 @@
 using UnityEngine;
 
-namespace _Universal
-{
     public class OldLookAtGameObject : MonoBehaviour
     {
         [SerializeField] private string gameObjectName = "target";
@@ -10,5 +8,4 @@ namespace _Universal
         void Start() => target = GameObject.Find(gameObjectName); // Find Target
         void Update() => transform.LookAt(target.transform); //Look At Target Every Frame
     }
-}
 

@@ -13,6 +13,7 @@ namespace Prototype2
         {
             curBeeSpeed = maxBeeSpeed;
             bumpTime = 0.7f;
+
         }
         void Update()
         {

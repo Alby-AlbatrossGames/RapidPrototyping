@@ -588,7 +588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1773672057822314480}
   - component: {fileID: 5307126480664842153}
-  - component: {fileID: 1983401921335101942}
+  - component: {fileID: 8238956772610866718}
   - component: {fileID: 53338774139529165}
   m_Layer: 0
   m_Name: Enemy
@@ -610,6 +610,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3250837249580691803}
   - {fileID: 4009209910135442217}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -625,8 +626,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f451291bdc29fc94bba435e534e6be4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beeSpeed: 5
---- !u!114 &1983401921335101942
+  curBeeSpeed: 0
+  maxBeeSpeed: 7
+  bumpTime: 0
+--- !u!114 &8238956772610866718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -635,7 +638,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5775974968781297815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91f99724f8aef4843b07aace73a7d97d, type: 3}
+  m_Script: {fileID: 11500000, guid: de7b6f459a82b9343a245f2c88a9a53a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameObjectName: Player
@@ -661,6 +664,59 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.4938984, y: 1, z: 1.3760948}
   m_Center: {x: -0.0068063736, y: 0, z: 0.52582383}
+--- !u!1 &6345508010755438115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3250837249580691803}
+  - component: {fileID: 6921021992238513581}
+  m_Layer: 6
+  m_Name: Anti-Bee Forcefield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3250837249580691803
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6345508010755438115}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.21}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1773672057822314480}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6921021992238513581
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6345508010755438115}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 55
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.91864276
+  m_Center: {x: 0.0003683567, y: 0, z: 0.21739209}
 --- !u!1 &7032013400981325042
 GameObject:
   m_ObjectHideFlags: 0
