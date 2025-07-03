@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Prototype2
         [SerializeField] private float curBeeSpeed;
         [SerializeField] public float maxBeeSpeed = 7;
         [SerializeField] private float bumpTime;
+        private int slideDir = 1;
 
         private void Start()
         {
@@ -22,12 +24,18 @@ namespace Prototype2
 
         void MoveBee() => gameObject.transform.position += transform.forward * curBeeSpeed * Time.deltaTime;
 
-        void OnHitPlayer(GameObject _bee)
-        {
-            StartCoroutine(UpdateBeeSpeed());
-        }
+        void SlideBee(int _dir) => gameObject.transform.position +=  (transform.right * _dir) * curBeeSpeed * Time.deltaTime;
 
-        private IEnumerator UpdateBeeSpeed()
+       /* void OnHitPlayer(GameObject _bee)
+        {
+            if (_bee == this.gameObject)
+            {
+                StartCoroutine(MoveBeeBack());
+                //Damage Player
+            }
+        }*/
+
+        private IEnumerator MoveBeeBack()
         {
             curBeeSpeed = (-maxBeeSpeed / 2);
 
@@ -41,20 +49,42 @@ namespace Prototype2
             curBeeSpeed = maxBeeSpeed;
         }
 
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag("Bee"))
+            {
+                Debug.Log("Bee Bumped");
+                SlideBee(slideDir);
+                //transform.position += (other.transform.position - transform.position).normalized * curBeeSpeed * Time.deltaTime;
+            }
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            GameEvents.ReportOnBeeHitPlayer(this.gameObject);
-        } // Report OnBeeHitPlayer Event
+            if (other.CompareTag("Player"))
+            {
+                StartCoroutine(MoveBeeBack());
+            }     
+            
+            if (other.CompareTag("Bee"))
+                slideDir = Random.Range(-1, 1);
+            //GameEvents.ReportOnBeeHitPlayer(this.gameObject);
+
+            //if (other.CompareTag("Bee"))
+                //transform.DOMove(facingAway * 2, 1f);
+                //transform.DOMove((transform.position - (other.transform.position - transform.position).normalized) * 3, 0.5f);
+            //transform.DOMove((other.transform.position - this.transform.position), 0.3f);
+        }
 
         #region EventListeners
-        private void OnEnable()
+/*        private void OnEnable()
         {
             GameEvents.OnBeeHitPlayer += OnHitPlayer;
         }
         private void OnDisable()
         {
             GameEvents.OnBeeHitPlayer -= OnHitPlayer;
-        }
+        }*/
         #endregion EventListeners
     }
 }
