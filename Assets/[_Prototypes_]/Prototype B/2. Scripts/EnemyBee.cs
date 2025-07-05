@@ -53,7 +53,6 @@ namespace Prototype2
         {
             if (other.CompareTag("Bee"))
             {
-                Debug.Log("Bee Bumped");
                 SlideBee(slideDir);
                 //transform.position += (other.transform.position - transform.position).normalized * curBeeSpeed * Time.deltaTime;
             }
@@ -64,11 +63,12 @@ namespace Prototype2
             if (other.CompareTag("Player"))
             {
                 StartCoroutine(MoveBeeBack());
+                GameEvents.ReportOnBeeHitPlayer(this.gameObject);
             }     
             
             if (other.CompareTag("Bee"))
                 slideDir = Random.Range(-1, 1);
-            //GameEvents.ReportOnBeeHitPlayer(this.gameObject);
+            
 
             //if (other.CompareTag("Bee"))
                 //transform.DOMove(facingAway * 2, 1f);

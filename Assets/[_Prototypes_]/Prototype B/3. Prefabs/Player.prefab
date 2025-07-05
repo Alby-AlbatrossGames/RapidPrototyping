@@ -126,6 +126,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 0
+  dashTime: 0.7
+  startupTime: 0.5
+  impaired: 0
+  hitPoints: 0
+  manaPoints: 0
+  honeyMoney: 0
+  hpText: {fileID: 0}
+  mpText: {fileID: 0}
+  honeyText: {fileID: 0}
 --- !u!54 &4002662830533809688
 Rigidbody:
   m_ObjectHideFlags: 0
