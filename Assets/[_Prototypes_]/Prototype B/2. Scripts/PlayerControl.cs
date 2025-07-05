@@ -138,6 +138,13 @@ namespace Prototype2
 
         #endregion Functions()
 
+        public void GainHoney(int _num)
+        {
+            int curHoney = honeyMoney;
+            honeyMoney += _num;
+            UpdateUI(honeyText, curHoney, honeyMoney);
+        }
+
         #region EventListeners
         private void OnEnable()
         {
