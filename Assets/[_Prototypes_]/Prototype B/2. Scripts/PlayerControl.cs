@@ -16,7 +16,7 @@ namespace Prototype2
         int minMult = 1;
         int curMult;
         Renderer mat;
-        
+        public GameObject gameOver;
 
         #region Variables
 
@@ -83,16 +83,35 @@ namespace Prototype2
 
         #region Functions()
 
-        public void UpdateUI(TMP_Text _txt, int _start, int _end, float _time = 0.4f ) => TweenX.TweenNumbers(_txt, _start, _end, _time, DG.Tweening.Ease.InSine);
+        public void UpdateUI(TMP_Text _txt, int _start, int _end, float _time = 0.4f) => TweenX.TweenNumbers(_txt, _start, _end, _time, DG.Tweening.Ease.InSine);
 
         public void TakeDamageFromBee(GameObject _null = null)
         {
+            if (hitPoints <= 0)
+            {
+                GetComponent<Renderer>().enabled = false;
+                gameOver.SetActive(true);
+                Time.timeScale = 0;
+                return;
+            }
+                
             int beeDMG = 10;
-
+            StartCoroutine(FlashColour(Color.red));
             int curHP = hitPoints;
             hitPoints -= beeDMG;
             UpdateUI(hpText, curHP, hitPoints);
 
+        }
+        public IEnumerator FlashColour(Color _c, float _time = 0.2f)
+        {
+            Color og = mat.material.color;
+            mat.material.color = _c;
+            yield return new WaitForSeconds(_time/3);
+            mat.material.color = og;
+            yield return new WaitForSeconds(_time/3);
+            mat.material.color = _c;
+            yield return new WaitForSeconds(_time/3);
+            mat.material.color = og;
         }
         void ResetHPMP()
         {
@@ -109,7 +128,7 @@ namespace Prototype2
             UpdateUI(mpText, curMP, manaPoints);
 
             transform.localScale = Vector3.one * 2 / 3;
-            mat.material.color = Color.red;
+            mat.material.color = Color.blueViolet;
             curMult = maxMult;
             yield return new WaitForSeconds(dashTime);
             curMult = minMult;
