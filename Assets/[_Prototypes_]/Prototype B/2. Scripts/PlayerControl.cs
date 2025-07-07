@@ -3,6 +3,7 @@ using _Universal.InputSystem;
 using TMPro;
 using System.Collections;
 using DG.Tweening;
+using ACX;
 
 namespace Prototype2
 {
@@ -12,7 +13,7 @@ namespace Prototype2
         public float dashTime = 0.7f;
         public float startupTime = 0.5f;
 
-        int maxMult = 5;
+        public int maxMult = 5;
         int minMult = 1;
         int curMult;
         Renderer mat;
@@ -68,7 +69,7 @@ namespace Prototype2
             if (!impaired)
             {
                 Vector3 direction = new Vector3(xdir, 0, zdir).normalized;
-                transform.position += direction * maxSpeed * Time.deltaTime;
+                transform.position += direction * maxSpeed * curMult * Time.deltaTime;
             }
         }
 
@@ -95,7 +96,7 @@ namespace Prototype2
                 return;
             }
                 
-            int beeDMG = 10;
+            int beeDMG = 20;
             StartCoroutine(FlashColour(Color.red));
             int curHP = hitPoints;
             hitPoints -= beeDMG;
@@ -121,6 +122,8 @@ namespace Prototype2
 
         public IEnumerator Dash()
         {
+            if (manaPoints <= 24)
+                yield break;
             Color og = mat.material.color;
 
             int curMP = manaPoints;
@@ -130,8 +133,10 @@ namespace Prototype2
             transform.localScale = Vector3.one * 2 / 3;
             mat.material.color = Color.blueViolet;
             curMult = maxMult;
+            AC.ACLog("Speed: " + maxSpeed * curMult, this.name);
             yield return new WaitForSeconds(dashTime);
             curMult = minMult;
+            AC.ACLog("Speed: " + maxSpeed * curMult, this.name);
             mat.material.color = og;
             transform.localScale = Vector3.one;
         }
@@ -143,6 +148,8 @@ namespace Prototype2
             int curHoney = honeyMoney;
             honeyMoney += _num;
             UpdateUI(honeyText, curHoney, honeyMoney);
+            manaPoints += 10;
+            UpdateUI(mpText, manaPoints - 10, manaPoints);
         }
 
         #region EventListeners
