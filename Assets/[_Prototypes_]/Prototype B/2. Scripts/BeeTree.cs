@@ -5,7 +5,7 @@ using ACX;
 
 namespace Prototype2
 {
-    public class Tree : MonoBehaviour
+    public class BeeTree : MonoBehaviour
     {
         public GameObject beePrefab;
         public GameObject honeyPrefab;
