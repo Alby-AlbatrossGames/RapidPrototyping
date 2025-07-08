@@ -13,8 +13,8 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: AGA312 Rapid Prototyping
-  productName: Alby's Prototype Playground - v1.2
-  defaultCursor: {fileID: 0}
+  productName: Glove Reaper
+  defaultCursor: {fileID: 2800000, guid: 0935e18d77774df44a637746f7d24f47, type: 3}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.70980394, g: 0.9058824, b: 0.11764707, a: 1}
   m_ShowUnitySplashScreen: 1
@@ -40,7 +40,7 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
-  - logo: {fileID: 21300000, guid: 04823ddd7eecfcc4595011256ecb9204, type: 3}
+  - logo: {fileID: 21300000, guid: e66bda24103fd554a85c9f2550b580af, type: 3}
     duration: 7
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
@@ -142,7 +142,7 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 1.2
+  bundleVersion: Prototype 2
   preloadedAssets:
   - {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   metroInputSource: 0
@@ -295,7 +295,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 04823ddd7eecfcc4595011256ecb9204, type: 3}
+      m_Icon: {fileID: 2800000, guid: e66bda24103fd554a85c9f2550b580af, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

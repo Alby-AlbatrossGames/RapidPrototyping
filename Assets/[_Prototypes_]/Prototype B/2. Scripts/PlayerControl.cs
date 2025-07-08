@@ -37,6 +37,7 @@ namespace Prototype2
         private int maxHitPoints = 100;
         private int maxManaPoints = 100;
         private int maxHoneyMoney = 50;
+        private float gameTime = 0;
         #endregion Variables
 
         #region Start() and Update()
@@ -52,6 +53,8 @@ namespace Prototype2
             mat = GetComponent<Renderer>();
             SetMaxValues();
         }
+
+        private void Update() => gameTime = Time.time;
 
         private void SetMaxValues()
         {
@@ -70,7 +73,12 @@ namespace Prototype2
         public TMP_Text honeyMaxTxt;
         public TMP_Text mpMaxTxt;
         public TMP_Text hpMaxTxt;
+
+        public TMP_Text gameoverTimeTxt;
+        public TMP_Text gameoverHoneyTxt;
         #endregion UI
+
+        private int honeyCollected = 0;
 
         #region Movement
         private void MoveUp() => MovePlayer(0, maxSpeed);
@@ -107,6 +115,9 @@ namespace Prototype2
                 GetComponent<Renderer>().enabled = false;
                 gameOver.SetActive(true);
                 Time.timeScale = 0;
+
+                gameoverHoneyTxt.text = honeyCollected.ToString() + "drops";
+                gameoverTimeTxt.text = gameTime.ToString("F0") + "sec.";
                 return;
             }
             StartCoroutine(FlashColour(Color.red));
@@ -207,6 +218,7 @@ namespace Prototype2
         /// <param name="_val">amount of HONEY to add/remove</param>
         void UpdateHoney(int _val)
         {
+            if (_val > 0) honeyCollected++;
             int curHONEY = honeyMoney;
             honeyMoney += _val;
             if (honeyMoney < 0) honeyMoney = 0;
