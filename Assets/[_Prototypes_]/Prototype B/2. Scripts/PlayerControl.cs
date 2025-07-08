@@ -52,6 +52,7 @@ namespace Prototype2
 
             mat = GetComponent<Renderer>();
             SetMaxValues();
+            impaired = false;
         }
 
         private void Update() => gameTime = Time.time;
@@ -114,7 +115,7 @@ namespace Prototype2
             {
                 GetComponent<Renderer>().enabled = false;
                 gameOver.SetActive(true);
-                Time.timeScale = 0;
+                impaired = true;
 
                 gameoverHoneyTxt.text = honeyCollected.ToString() + "drops";
                 gameoverTimeTxt.text = gameTime.ToString("F0") + "sec.";
@@ -129,7 +130,7 @@ namespace Prototype2
         {
             if (honeyMoney >= maxHoneyMoney)
             {
-                honeyMoney -= maxHoneyMoney;
+                UpdateHoney(-maxHoneyMoney);
                 upgradeTier += 1;
                 if (upgradeTier == 5)
                 {
