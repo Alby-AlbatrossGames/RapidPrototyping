@@ -13,6 +13,8 @@ namespace Prototype2
         public float dashTime = 0.7f;
         public float startupTime = 0.5f;
 
+        private bool firstTimeDashBugFix = true;
+
         public int maxMult = 5;
         int minMult = 1;
         int curMult;
@@ -122,6 +124,11 @@ namespace Prototype2
 
         public IEnumerator Dash()
         {
+            if (firstTimeDashBugFix)
+            { 
+                firstTimeDashBugFix = false;
+                yield break;
+            }
             if (manaPoints <= 24)
                 yield break;
             Color og = mat.material.color;
