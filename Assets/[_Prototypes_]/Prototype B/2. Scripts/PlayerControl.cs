@@ -13,7 +13,8 @@ namespace Prototype2
         public float dashTime = 0.7f;
         public float startupTime = 0.5f;
 
-        private bool firstTimeDashBugFix = true;
+        int upgradeTier = 1;
+        int upgradeLevel = 1;
 
         public int maxMult = 5;
         int minMult = 1;
@@ -35,7 +36,7 @@ namespace Prototype2
 
         private int maxHitPoints = 100;
         private int maxManaPoints = 100;
-        private int maxHoneyMoney = 10;
+        private int maxHoneyMoney = 50;
         #endregion Variables
 
         #region Start() and Update()
@@ -49,6 +50,14 @@ namespace Prototype2
             UpdateUI(honeyText, 999, 0, startupTime);
 
             mat = GetComponent<Renderer>();
+            SetMaxValues();
+        }
+
+        private void SetMaxValues()
+        {
+            honeyMaxTxt.text = maxHoneyMoney.ToString();
+            mpMaxTxt.text = maxManaPoints.ToString();
+            hpMaxTxt.text = maxHitPoints.ToString();
         }
 
         #endregion Start() and Update()
@@ -58,6 +67,9 @@ namespace Prototype2
         public TMP_Text hpText;
         public TMP_Text mpText;
         public TMP_Text honeyText;
+        public TMP_Text honeyMaxTxt;
+        public TMP_Text mpMaxTxt;
+        public TMP_Text hpMaxTxt;
         #endregion UI
 
         #region Movement
@@ -79,7 +91,7 @@ namespace Prototype2
 
         #region Actions
         private void Action1() => StartCoroutine(Dash());
-        private void Action2() => Debug.Log("[Action2]");
+        private void Action2() => UpgradePlayer();
         private void Action3() => Debug.Log("[Action3]");
         private void Action4() => Debug.Log("[Action4]");
         #endregion Actions
@@ -97,13 +109,27 @@ namespace Prototype2
                 Time.timeScale = 0;
                 return;
             }
-                
-            int beeDMG = 20;
             StartCoroutine(FlashColour(Color.red));
-            int curHP = hitPoints;
-            hitPoints -= beeDMG;
-            UpdateUI(hpText, curHP, hitPoints);
+            UpdateHealth(-20);
 
+        }
+
+        public void UpgradePlayer()
+        {
+            if (honeyMoney >= maxHoneyMoney)
+            {
+                honeyMoney -= maxHoneyMoney;
+                upgradeTier += 1;
+                if (upgradeTier == 5)
+                {
+                    upgradeTier = 1;
+                    upgradeLevel += 1;
+                }
+
+                int upgradeVal = 100 * (1 + (upgradeLevel / 100) * upgradeTier);
+                UpgradeMaxHealth(upgradeVal);
+            }
+            
         }
         public IEnumerator FlashColour(Color _c, float _time = 0.2f)
         {
@@ -124,21 +150,14 @@ namespace Prototype2
 
         public IEnumerator Dash()
         {
-            if (firstTimeDashBugFix)
-            { 
-                firstTimeDashBugFix = false;
-                yield break;
-            }
             if (manaPoints <= 24)
                 yield break;
             Color og = mat.material.color;
 
-            int curMP = manaPoints;
-            manaPoints -= 25;
-            UpdateUI(mpText, curMP, manaPoints);
+            UpdateMana(-25);
 
             transform.localScale = Vector3.one * 2 / 3;
-            mat.material.color = Color.blueViolet;
+            mat.material.color = Color.saddleBrown;
             curMult = maxMult;
             AC.ACLog("Speed: " + maxSpeed * curMult, this.name);
             yield return new WaitForSeconds(dashTime);
@@ -152,11 +171,52 @@ namespace Prototype2
 
         public void GainHoney(int _num)
         {
-            int curHoney = honeyMoney;
-            honeyMoney += _num;
-            UpdateUI(honeyText, curHoney, honeyMoney);
-            manaPoints += 10;
-            UpdateUI(mpText, manaPoints - 10, manaPoints);
+            UpdateHoney(10);
+            UpdateMana(5);
+        }
+
+        /// <summary>
+        /// Updates Health with an animation
+        /// </summary>
+        /// <param name="_val">amount of HP to add/remove</param>
+        void UpdateHealth(int _val)
+        {
+            int curHP = hitPoints;
+            hitPoints += _val;
+            if (hitPoints < 0) hitPoints = 0;
+            if (hitPoints > maxHitPoints) hitPoints = maxHitPoints;
+            UpdateUI(hpText, curHP, hitPoints);
+        }
+
+        /// <summary>
+        /// Updates Mana with an animation
+        /// </summary>
+        /// <param name="_val">amount of MANA to add/remove</param>
+        void UpdateMana(int _val)
+        {
+            int curMANA = manaPoints;
+            manaPoints += _val;
+            if (manaPoints < 0) manaPoints = 0;
+            if (manaPoints > maxManaPoints) manaPoints = maxManaPoints;
+            UpdateUI(mpText, curMANA, manaPoints);
+        }
+
+        /// <summary>
+        /// Updates Honey with an animation
+        /// </summary>
+        /// <param name="_val">amount of HONEY to add/remove</param>
+        void UpdateHoney(int _val)
+        {
+            int curHONEY = honeyMoney;
+            honeyMoney += _val;
+            if (honeyMoney < 0) honeyMoney = 0;
+            UpdateUI(honeyText, curHONEY, honeyMoney);
+        }
+
+        void UpgradeMaxHealth(int _val)
+        {
+            UpdateUI(hpMaxTxt, maxHitPoints, maxHitPoints + _val);
+            maxHitPoints += _val;
         }
 
         #region EventListeners

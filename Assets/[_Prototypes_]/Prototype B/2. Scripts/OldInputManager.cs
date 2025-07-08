@@ -24,14 +24,14 @@ namespace _Universal.InputSystem
         }
         void PlayerActions()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-                InputEvents.ReportOnInputAction1(); //Action 1
-            if ((Input.GetKeyDown(KeyCode.LeftShift)) || (Input.GetKeyDown(KeyCode.RightShift))) //FOR PROTOTYPE 2, Mouse0 and Space were swapped
-                InputEvents.ReportOnInputAction2(); //Action 2
             if (Input.GetKeyDown(KeyCode.Space))
-                InputEvents.ReportOnInputAction1(); //Action 3
+                InputEvents.ReportOnInputAction1(); //Action 1
+            if ((Input.GetKeyDown(KeyCode.LeftShift)) || (Input.GetKeyDown(KeyCode.RightShift)))
+                InputEvents.ReportOnInputAction2(); //Action 2
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+                InputEvents.ReportOnInputAction3(); //Action 3
             if (Input.GetKeyDown(KeyCode.Mouse1))
-                InputEvents.ReportOnInputAction1(); //Action 4
+                InputEvents.ReportOnInputAction4(); //Action 4
         }
     }
 }
