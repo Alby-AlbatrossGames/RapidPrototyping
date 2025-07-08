@@ -15,6 +15,11 @@ public class TweenFun : GameBehaviour
     [SerializeField] private int score = 0;
     [SerializeField] private Ease scoreEase;
 
+    public void Start()
+    {
+        player.GetComponent<Renderer>().material.color = _SAVE.GetPlayerColor;
+        score = _SAVE.GetHighscore;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) { MovePlayer(Dir.E, _t); }
@@ -26,7 +31,8 @@ public class TweenFun : GameBehaviour
         switch (_dir)
         {
             case Dir.E:
-                player.transform.DOLocalMoveX(_startPos.x + moveDist, _time);
+                player.transform.DOLocalMoveX(_startPos.x + moveDist, _time).OnComplete(()=> { Debug.Log("huzzah"); });
+                ;
                 break;
         }
     }

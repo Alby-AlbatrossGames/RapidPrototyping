@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GameBehaviour : MonoBehaviour
 {
-
+    protected static SaveManager _SAVE => SaveManager.Instance;
 
     #region Coroutine Helpers
 
