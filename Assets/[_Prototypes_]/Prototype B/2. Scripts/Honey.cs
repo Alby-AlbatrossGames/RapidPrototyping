@@ -16,7 +16,11 @@ namespace Prototype2
             transform.DOScale(Vector3.zero, 2).onComplete = KillSelf;
         }
 
-        private void KillSelf() => Destroy(gameObject);
+        private void KillSelf()
+        {
+            dying = false;
+            Destroy(gameObject);
+        }
 
         private void Update()
         {

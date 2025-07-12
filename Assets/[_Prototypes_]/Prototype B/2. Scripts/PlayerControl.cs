@@ -169,7 +169,7 @@ namespace Prototype2
             UpdateMana(-25);
 
             transform.localScale = Vector3.one * 2 / 3;
-            mat.material.color = Color.saddleBrown;
+            mat.material.color = Color.black;
             curMult = maxMult;
             AC.ACLog("Speed: " + maxSpeed * curMult, this.name);
             yield return new WaitForSeconds(dashTime);
