@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,12 +12,24 @@ namespace Prototype3
         private Vector2 wrldRotation;
         private Vector3 wrldAngle;
         [SerializeField] private int maxDist;
+        [SerializeField] public bool canMove = false;
 
         #region Start() and Update()
-        private void Start() { }
+        private void Start() 
+        { 
+            Time.timeScale = 2f;
+            StartCoroutine(InitTimer());
+        }
+
+        IEnumerator InitTimer()
+        {
+            yield return new WaitForSeconds(5); //Time for intro to finish = 4.5s
+            canMove = true;
+        }
         private void Update()
         {
-            RotateWorldObject();
+            if (canMove)
+                RotateWorldObject();
 
         }
         #endregion Start() and Update()

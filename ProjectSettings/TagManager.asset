@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - ghost
   - Bee
+  - Marble
   layers:
   - Default
   - TransparentFX
