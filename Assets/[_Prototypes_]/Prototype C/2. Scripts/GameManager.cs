@@ -7,8 +7,7 @@ namespace Prototype3
 {
     public class GameManager : MonoBehaviour
     {
-
-
+        
 
     }
 }
