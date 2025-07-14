@@ -47,8 +47,7 @@ namespace Prototype3
         #region InputAction Events
         void OnRotateWorld(InputValue _input)
         {
-            joystickInput = _input.Get<Vector2>();
-
+            joystickInput = _input.Get<Vector2>();          
             if (PlayerInput.GetPlayerByIndex(0).currentControlScheme == "Gamepad")
                 ShowGamepadControls();
 
@@ -62,7 +61,8 @@ namespace Prototype3
         }
 
         #endregion InputAction Events
-        void RotateWorldObject()
+
+        void RotateWorldObject() //does all the heavy lifting
         {
             wrldAngle = new Vector3(joystickInput.x * maxDist, 0, joystickInput.y * maxDist);
             world.transform.eulerAngles = wrldAngle;
