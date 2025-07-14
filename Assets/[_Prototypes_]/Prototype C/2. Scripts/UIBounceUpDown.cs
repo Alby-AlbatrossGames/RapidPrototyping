@@ -19,13 +19,13 @@ namespace ACX
         void BounceIn()
         {
             Time.timeScale = 0;
-            transform.DOMoveY(Screen.height/2, 1.5f).SetEase(Ease.OutBounce).SetUpdate(true);
+            transform.DOMoveY(Screen.height/2, 1f).SetEase(Ease.OutExpo).SetUpdate(true);
         }
 
         void BounceOut()
         {
             Time.timeScale = 1;
-            transform.DOMoveY(-Screen.height/2, 1.5f).SetEase(Ease.OutExpo).SetUpdate(true);
+            transform.DOMoveY(-Screen.height/2, 1f).SetEase(Ease.OutExpo).SetUpdate(true);
         }
     }
 }
