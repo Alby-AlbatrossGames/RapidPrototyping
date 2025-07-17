@@ -53,7 +53,6 @@ namespace Prototype3
 
             else if (PlayerInput.GetPlayerByIndex(0).currentControlScheme == "Keyboard&Mouse")
                 ShowKeyboardControls();
-            Debug.Log("joystickInput: " + joystickInput);
         }
         public void OnPause()
         {
@@ -67,7 +66,6 @@ namespace Prototype3
         {
             wrldAngle = new Vector3(joystickInput.x * maxDist, 0, joystickInput.y * maxDist);
             world.transform.eulerAngles = wrldAngle;
-            Debug.Log("wrldAngle: "+wrldAngle);
         }
 
         void ShowGamepadControls()
