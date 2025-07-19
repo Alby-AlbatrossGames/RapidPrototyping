@@ -43,6 +43,7 @@ namespace Prototype2
         #region Start() and Update()
         private void Start()
         {
+            Time.timeScale = 1;
             maxSpeed = 10;
             curMult = minMult;
             ResetHPMP();

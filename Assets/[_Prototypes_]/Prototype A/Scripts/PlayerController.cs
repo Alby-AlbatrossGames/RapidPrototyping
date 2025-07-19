@@ -32,6 +32,7 @@ public class PlayerController : GameBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         playerRb = GetComponent<Rigidbody>();
         fwdDirection = GameObject.Find("CamDirection");
         playerMeshRenderer = GetComponent<MeshRenderer>();

@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
+  - enabled: 1
+    path: Assets/[_Prototypes_]/Title Screen/Title.unity
+    guid: 9dae0abfdc747334280f09d7d170d57b
+  - enabled: 1
     path: Assets/[_Prototypes_]/Prototype A/Scenes/Prototype A.unity
     guid: a4b96ad7a65484fd4a83cb97540eee50
-  - enabled: 0
+  - enabled: 1
     path: Assets/[_Prototypes_]/Prototype B/1. Scenes/Tree Game.unity
     guid: 250ba0f6137da8242bf789a8f851c929
   - enabled: 1

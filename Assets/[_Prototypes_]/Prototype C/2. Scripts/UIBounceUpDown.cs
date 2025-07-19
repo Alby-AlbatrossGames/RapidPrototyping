@@ -24,8 +24,8 @@ namespace ACX
 
         void BounceOut()
         {
-            Time.timeScale = 1;
-            transform.DOMoveY(-Screen.height/2, 1f).SetEase(Ease.OutExpo).SetUpdate(true);
+            Time.timeScale = 2;
+            transform.DOMoveY(-Screen.height/2, 2f).SetEase(Ease.OutExpo).SetUpdate(true);
         }
     }
 }
