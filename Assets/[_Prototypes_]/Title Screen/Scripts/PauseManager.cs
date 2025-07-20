@@ -1,6 +1,8 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class PauseManager : GameBehaviour
 {
@@ -8,6 +10,8 @@ public class PauseManager : GameBehaviour
     public GameObject pauseMenu;
     private bool isPaused;
     private float gameTimeScale;
+
+    public UnityEvent selectInitialButton;
 
     #region Start() Update()
     private void Start()
@@ -32,14 +36,17 @@ public class PauseManager : GameBehaviour
 
         if (isPaused)
         {
+            selectInitialButton.Invoke();
             Time.timeScale = 0;
-            //pauseMenu.transform.DOMoveX(244f, 0.3f).SetEase(Ease.OutQuint);
         }
         if (!isPaused)
         {
             Time.timeScale = gameTimeScale;
         }
-
-        //pauseMenu.SetActive(!isPaused);
     }
+
+    public void Resume() => OnPauseButton();
+    public void LoadSceneByName(string scene) => SceneManager.LoadScene(scene);
+    public void ReloadActiveScene() => LoadSceneByName(SceneManager.GetActiveScene().name);
+    public void QuitApp() => Application.Quit();
 }

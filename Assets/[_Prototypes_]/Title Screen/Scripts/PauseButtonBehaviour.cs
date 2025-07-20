@@ -1,10 +1,16 @@
 ﻿using DG.Tweening;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseButtonBehaviour : MonoBehaviour
+public class PauseButtonBehaviour : GameBehaviour
 {
+    public enum BtnName { Resume, Restart, Title, Quit };
+    public BtnName buttonName;
+
+    private PauseManager pauseManager;
+
     private int constantWidth = 920;
     private int initialHeight = 100;
 
@@ -16,42 +22,44 @@ public class PauseButtonBehaviour : MonoBehaviour
     private TMP_Text btnText;
     private string label;
 
-    private bool confirm;
-
     private void Start()
     {
-        confirm = false;
+        pauseManager = FindFirstObjectByType<PauseManager>();
         btnText = GetComponentInChildren<TMP_Text>();
-        label = btnText.text;
         rectSize = GetComponent<RectTransform>();
+
+        label = btnText.text;
     }
 
     public void Select()
     {
-        rectSize.DOSizeDelta(btnScale, animTime).SetEase(Ease.OutQuad);
-        if (!confirm)
-            btnText.text = label + " <";
+        rectSize.DOSizeDelta(btnScale, animTime).SetEase(Ease.OutQuad).SetUpdate(true);
+        ExecuteAfterFrames(3, () => btnText.text = label + " <");
     }
 
     public void Deselect()
     {
-        rectSize.DOSizeDelta(new Vector2(920,100), animTime).SetEase(Ease.OutQuad);
-        if (!confirm)
-            btnText.text = label;
+        btnText.text = label;
+        rectSize.DOSizeDelta(new Vector2(920,100), animTime).SetEase(Ease.OutQuad).SetUpdate(true);
     }
 
     public void Submit()
     {
-        if (!confirm)
+        Deselect();
+        switch (buttonName)
         {
-            btnText.text = label + " < ?";
-            confirm = true;
-            return;
+            case BtnName.Resume:
+                pauseManager.Resume();
+                return;
+            case BtnName.Restart:
+                pauseManager.ReloadActiveScene();
+                return;
+            case BtnName.Title:
+                pauseManager.LoadSceneByName("Title");
+                return;
+            case BtnName.Quit:
+                pauseManager.QuitApp();
+                return;
         }
-        else
-        {
-            btnText.text = "Loading...";
-        }
-        
     }
 }
