@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using Unity.UI;
 using TMPro;
 
 namespace MainMenu
