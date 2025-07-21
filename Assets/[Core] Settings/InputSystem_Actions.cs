@@ -820,6 +820,87 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""BackupButtons"",
+            ""id"": ""c6a81a24-8594-42a9-8d09-064e4e638bea"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""77c9a994-a1bb-4533-841b-70beeb2950ec"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""b256d78e-c9ce-4149-8d02-004a7e263f5b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5e139b0f-2728-40df-b9a8-5ad461de14c0"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0515626c-92ad-4129-ba4f-a151245b1fe9"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2fa3fad-daf6-4557-9dd5-885bd5540b9a"",
+                    ""path"": ""<Pen>/tip"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""457e00f6-af53-43c1-9ad9-4e5646e6dc3d"",
+                    ""path"": ""<Touchscreen>/touch*/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e0b9177-324a-4da8-b660-62eb44f93c07"",
+                    ""path"": ""<XRController>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -899,6 +980,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         // DefaultControls
         m_DefaultControls = asset.FindActionMap("DefaultControls", throwIfNotFound: true);
         m_DefaultControls_Pause = m_DefaultControls.FindAction("Pause", throwIfNotFound: true);
+        // BackupButtons
+        m_BackupButtons = asset.FindActionMap("BackupButtons", throwIfNotFound: true);
+        m_BackupButtons_Newaction = m_BackupButtons.FindAction("New action", throwIfNotFound: true);
+        m_BackupButtons_Click = m_BackupButtons.FindAction("Click", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -906,6 +991,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Prototype3.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Prototype3.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_PauseMenu.enabled, "This will cause a leak and performance issues, InputSystem_Actions.PauseMenu.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_DefaultControls.enabled, "This will cause a leak and performance issues, InputSystem_Actions.DefaultControls.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_BackupButtons.enabled, "This will cause a leak and performance issues, InputSystem_Actions.BackupButtons.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1320,6 +1406,113 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="DefaultControlsActions" /> instance referencing this action map.
     /// </summary>
     public DefaultControlsActions @DefaultControls => new DefaultControlsActions(this);
+
+    // BackupButtons
+    private readonly InputActionMap m_BackupButtons;
+    private List<IBackupButtonsActions> m_BackupButtonsActionsCallbackInterfaces = new List<IBackupButtonsActions>();
+    private readonly InputAction m_BackupButtons_Newaction;
+    private readonly InputAction m_BackupButtons_Click;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "BackupButtons".
+    /// </summary>
+    public struct BackupButtonsActions
+    {
+        private @InputSystem_Actions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public BackupButtonsActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "BackupButtons/Newaction".
+        /// </summary>
+        public InputAction @Newaction => m_Wrapper.m_BackupButtons_Newaction;
+        /// <summary>
+        /// Provides access to the underlying input action "BackupButtons/Click".
+        /// </summary>
+        public InputAction @Click => m_Wrapper.m_BackupButtons_Click;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_BackupButtons; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="BackupButtonsActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(BackupButtonsActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="BackupButtonsActions" />
+        public void AddCallbacks(IBackupButtonsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_BackupButtonsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_BackupButtonsActionsCallbackInterfaces.Add(instance);
+            @Newaction.started += instance.OnNewaction;
+            @Newaction.performed += instance.OnNewaction;
+            @Newaction.canceled += instance.OnNewaction;
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="BackupButtonsActions" />
+        private void UnregisterCallbacks(IBackupButtonsActions instance)
+        {
+            @Newaction.started -= instance.OnNewaction;
+            @Newaction.performed -= instance.OnNewaction;
+            @Newaction.canceled -= instance.OnNewaction;
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="BackupButtonsActions.UnregisterCallbacks(IBackupButtonsActions)" />.
+        /// </summary>
+        /// <seealso cref="BackupButtonsActions.UnregisterCallbacks(IBackupButtonsActions)" />
+        public void RemoveCallbacks(IBackupButtonsActions instance)
+        {
+            if (m_Wrapper.m_BackupButtonsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="BackupButtonsActions.AddCallbacks(IBackupButtonsActions)" />
+        /// <seealso cref="BackupButtonsActions.RemoveCallbacks(IBackupButtonsActions)" />
+        /// <seealso cref="BackupButtonsActions.UnregisterCallbacks(IBackupButtonsActions)" />
+        public void SetCallbacks(IBackupButtonsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_BackupButtonsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_BackupButtonsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="BackupButtonsActions" /> instance referencing this action map.
+    /// </summary>
+    public BackupButtonsActions @BackupButtons => new BackupButtonsActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -1464,5 +1657,27 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "BackupButtons" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="BackupButtonsActions.AddCallbacks(IBackupButtonsActions)" />
+    /// <seealso cref="BackupButtonsActions.RemoveCallbacks(IBackupButtonsActions)" />
+    public interface IBackupButtonsActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "New action" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnNewaction(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Click" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnClick(InputAction.CallbackContext context);
     }
 }

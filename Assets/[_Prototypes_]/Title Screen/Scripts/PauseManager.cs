@@ -21,7 +21,7 @@ public class PauseManager : GameBehaviour
     }
     private void Update()
     {
-
+        
     }
     #endregion Start() Update()
     public void OnPauseButton()
@@ -32,16 +32,19 @@ public class PauseManager : GameBehaviour
     private void TogglePause()
     {
         isPaused = !isPaused;
+        Debug.Log("Paused = "+isPaused);
         pauseMenu.SetActive(isPaused);
 
         if (isPaused)
         {
             selectInitialButton.Invoke();
             Time.timeScale = 0;
+            Debug.Log("TimeScale = "+Time.timeScale);
         }
         if (!isPaused)
         {
             Time.timeScale = gameTimeScale;
+            Debug.Log("TimeScale = " + Time.timeScale);
         }
     }
 

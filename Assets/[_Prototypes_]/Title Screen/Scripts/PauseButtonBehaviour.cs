@@ -49,15 +49,19 @@ public class PauseButtonBehaviour : GameBehaviour
         switch (buttonName)
         {
             case BtnName.Resume:
+                Debug.Log("Resuming...");
                 pauseManager.Resume();
                 return;
             case BtnName.Restart:
+                Debug.Log("Restarting...");
                 pauseManager.ReloadActiveScene();
                 return;
             case BtnName.Title:
+                Debug.Log("Loading Title Screen...");
                 pauseManager.LoadSceneByName("Title");
                 return;
             case BtnName.Quit:
+                Debug.Log("Quitting Application...");
                 pauseManager.QuitApp();
                 return;
         }
