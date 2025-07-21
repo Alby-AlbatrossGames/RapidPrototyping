@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PauseManager : GameBehaviour
 {
@@ -12,6 +13,8 @@ public class PauseManager : GameBehaviour
     private float gameTimeScale;
 
     public UnityEvent selectInitialButton;
+
+    public Image pauseBG;
 
     #region Start() Update()
     private void Start()
@@ -37,16 +40,20 @@ public class PauseManager : GameBehaviour
     {
         isPaused = !isPaused;
         Debug.Log("Paused = "+isPaused);
-        pauseMenu.SetActive(isPaused);
 
         if (isPaused)
         {
+            pauseMenu.SetActive(isPaused);
             selectInitialButton.Invoke();
             Time.timeScale = 0;
+            pauseBG.DOFade(100f, 0.3f);
+            return;
         }
         if (!isPaused)
         {
             Time.timeScale = gameTimeScale;
+            pauseBG.DOFade(0, 0.3f).OnComplete(() => pauseMenu.SetActive(isPaused));
+            return;
         }
     }
 
