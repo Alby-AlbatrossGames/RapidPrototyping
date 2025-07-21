@@ -46,13 +46,14 @@ public class PauseManager : GameBehaviour
             pauseMenu.SetActive(isPaused);
             selectInitialButton.Invoke();
             Time.timeScale = 0;
-            pauseBG.DOFade(100f, 0.3f);
+            pauseBG.DOFade(100f, 0.3f).SetUpdate(true);
             return;
         }
         if (!isPaused)
         {
             Time.timeScale = gameTimeScale;
-            pauseBG.DOFade(0, 0.3f).OnComplete(() => pauseMenu.SetActive(isPaused));
+            pauseBG.DOFade(0, 0.3f).SetUpdate(true);
+            pauseMenu.SetActive(isPaused);
             return;
         }
     }
