@@ -4,10 +4,17 @@ namespace _Universal.InputSystem
 {
     public class OldInputManager : GameBehaviour
     {
+        private PauseManager pauseManager;
+
+        private void Start()
+        {
+            pauseManager = FindFirstObjectByType<PauseManager>();
+        }
         private void Update()
         {
             PlayerMovement();
             PlayerActions();
+            PausePlay();
         }
 
         void PlayerMovement()
@@ -32,6 +39,11 @@ namespace _Universal.InputSystem
                 InputEvents.ReportOnInputAction3(); //Action 3
             if (Input.GetKeyDown(KeyCode.Mouse1))
                 InputEvents.ReportOnInputAction4(); //Action 4
+        }
+
+        void PausePlay()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape)) pauseManager.OnPauseButton();
         }
     }
 }

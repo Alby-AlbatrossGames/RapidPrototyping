@@ -8,7 +8,7 @@ public class PauseManager : GameBehaviour
 {
     // Pause UI
     public GameObject pauseMenu;
-    private bool isPaused;
+    public bool isPaused;
     private float gameTimeScale;
 
     public UnityEvent selectInitialButton;
@@ -17,7 +17,11 @@ public class PauseManager : GameBehaviour
     private void Start()
     {
         isPaused = false;
-        ExecuteAfterFrames(3,() => { gameTimeScale = Time.timeScale; });
+        ExecuteAfterFrames(3,() => { 
+            if (Time.timeScale != 0) 
+                gameTimeScale = Time.timeScale;
+            else gameTimeScale = 1;
+        });
     }
     private void Update()
     {
@@ -39,12 +43,10 @@ public class PauseManager : GameBehaviour
         {
             selectInitialButton.Invoke();
             Time.timeScale = 0;
-            Debug.Log("TimeScale = "+Time.timeScale);
         }
         if (!isPaused)
         {
             Time.timeScale = gameTimeScale;
-            Debug.Log("TimeScale = " + Time.timeScale);
         }
     }
 

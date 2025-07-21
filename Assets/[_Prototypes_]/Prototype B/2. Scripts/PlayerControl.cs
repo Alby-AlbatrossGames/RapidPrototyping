@@ -231,6 +231,7 @@ namespace Prototype2
         {
             UpdateUI(hpMaxTxt, maxHitPoints, maxHitPoints + _val);
             maxHitPoints += _val;
+            UpdateHealth(maxHitPoints - hitPoints);
         }
 
         #region EventListeners

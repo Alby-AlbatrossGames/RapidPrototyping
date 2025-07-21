@@ -16,8 +16,6 @@ namespace Prototype3
         private Vector3 wrldAngle;
         [SerializeField] private int maxDist;
         [SerializeField] public bool canMove = false;
-        [Header("Pause UI Script")]
-        public UIBounceUpDown _PauseUI;
         [Header("UI")]
         [SerializeField] public TMP_Text gamepadControlUIOne;
         [SerializeField] public TMP_Text gamepadControlUITwo;
@@ -25,11 +23,14 @@ namespace Prototype3
         [SerializeField] public TMP_Text keyboardControlUITwo;
         public GameObject controlsCanvas;
 
+        private PauseManager pauseManager;
+
         #region Start() and Update()
         private void Start() 
         { 
             Time.timeScale = 2f;
             StartCoroutine(InitTimer());
+            pauseManager = FindFirstObjectByType<PauseManager>();
         }
 
         IEnumerator InitTimer()
@@ -56,8 +57,8 @@ namespace Prototype3
         }
         public void OnPause()
         {
-            _PauseUI.PauseGame();
-            controlsCanvas.SetActive(!_PauseUI.paused);
+            pauseManager.OnPauseButton();
+            controlsCanvas.SetActive(!pauseManager.isPaused);
         }
 
         #endregion InputAction Events
