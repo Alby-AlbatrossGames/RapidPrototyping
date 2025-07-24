@@ -46,7 +46,7 @@ namespace Prototype4
             ExecuteAfterSeconds((beatDuration/8) *1, EndPerfectBeatWindow);
             ExecuteAfterSeconds((beatDuration/8) *3, EndGoodBeatWindow);
             ExecuteAfterSeconds((beatDuration/8) *6, EndOKBeatWindow);
-            ExecuteAfterSeconds((beatDuration / 8) * 7, StartPerfectBeatWindow);
+            // ExecuteAfterSeconds((beatDuration / 8) * 7, StartPerfectBeatWindow);
             ExecuteAfterSeconds(beatDuration, StartBeat);
         }
         private void EndPerfectBeatWindow()
@@ -64,11 +64,11 @@ namespace Prototype4
             EventManager.ReportOnOKWindowEnd();
             testObj.GetComponent<Renderer>().material.color = Color.red;
         }
-        private void StartPerfectBeatWindow()
+        /*private void StartPerfectBeatWindow()
         {
             EventManager.ReportOnWindowStart();
             testObj.GetComponent<Renderer>().material.color = Color.blue;
-        }
+        }*/
     }
 }
 

@@ -19,7 +19,7 @@ namespace Prototype4
 
         private void OnEnable()
         {
-            EventManager.OnWindowStart += SetTimingPERFECT;
+            EventManager.OnBeatStart += SetTimingPERFECT;
             EventManager.OnPerfectWindowEnd += SetTimingGOOD;
             EventManager.OnGoodWindowEnd += SetTimingOK;
             EventManager.OnOKWindowEnd += SetTimingMISS;
