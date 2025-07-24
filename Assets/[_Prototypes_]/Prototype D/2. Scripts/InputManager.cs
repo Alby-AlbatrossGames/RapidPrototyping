@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 namespace Prototype4
@@ -9,10 +10,7 @@ namespace Prototype4
         public enum BeatTiming { MISS, PERFECT, GOOD, OK }
         public BeatTiming beatTiming = BeatTiming.MISS;
 
-        private void Update()
-        {
-            
-        }
+        public TMP_Text testText;
 
         void SetTimingPERFECT() => beatTiming = BeatTiming.PERFECT;
         void SetTimingGOOD() => beatTiming = BeatTiming.GOOD;
@@ -21,7 +19,7 @@ namespace Prototype4
 
         private void OnEnable()
         {
-            EventManager.OnBeatStart += SetTimingPERFECT;
+            EventManager.OnWindowStart += SetTimingPERFECT;
             EventManager.OnPerfectWindowEnd += SetTimingGOOD;
             EventManager.OnGoodWindowEnd += SetTimingOK;
             EventManager.OnOKWindowEnd += SetTimingMISS;
@@ -33,19 +31,24 @@ namespace Prototype4
             switch (beatTiming)
             {
                 case BeatTiming.MISS:
-                    Debug.Log("Missed!");
+                    testText.text = "Miss...";
+                    testText.color = Color.red;
                     break;
                 case BeatTiming.OK:
-                    Debug.Log("OK!");
+                    testText.text = "OK!";
+                    testText.color = Color.yellow;
                     break;
                 case BeatTiming.GOOD:
-                    Debug.Log("Good!");
+                    testText.text = "Good!";
+                    testText.color = Color.green;
                     break;
                 case BeatTiming.PERFECT:
-                    Debug.Log("Perfect!");
+                    testText.text = "Perfect!";
+                    testText.color = Color.blue;
                     break;
                 default:
-                    Debug.Log("Error");
+                    testText.text = "ERROR";
+                    testText.color = Color.black;
                     break;
 
 

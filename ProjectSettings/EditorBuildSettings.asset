@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
-    path: Assets/[_Prototypes_]/Title Screen/OldTitle.unity
+    path: Assets/[_Prototypes_]/Title Screen (Old)/OldTitle.unity
     guid: 9dae0abfdc747334280f09d7d170d57b
   - enabled: 1
-    path: Assets/[_Prototypes_]/PrototypeSelect/Scene/Title.unity
+    path: Assets/[_Prototypes_]/Title Screen (Current)/Scene/Title.unity
     guid: 5369aceee2b049147bb9ee2fddb0789f
   - enabled: 1
     path: Assets/[_Prototypes_]/Prototype A/Scenes/Prototype A.unity
