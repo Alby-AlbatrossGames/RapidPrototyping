@@ -1032,10 +1032,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beatTiming: 0
-  upFeedback: {fileID: 0}
-  downFeedback: {fileID: 0}
-  leftFeedback: {fileID: 0}
-  rightFeedback: {fileID: 0}
+  upFeedback: {fileID: 499399772}
+  downFeedback: {fileID: 1400143958}
+  leftFeedback: {fileID: 1875311150}
+  rightFeedback: {fileID: 1431107765}
 --- !u!114 &1217966046
 MonoBehaviour:
   m_ObjectHideFlags: 0
