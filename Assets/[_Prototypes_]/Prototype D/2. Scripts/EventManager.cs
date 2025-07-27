@@ -5,7 +5,7 @@ namespace Prototype4
 {
     public class EventManager : MonoBehaviour
     {
-
+        #region Beat
         public static event Action OnBeatStart = null;
         public static event Action OnWindowStart = null;
         public static event Action OnPerfectWindowEnd = null;
@@ -17,7 +17,13 @@ namespace Prototype4
         public static void ReportOnPerfectWindowEnd() => OnPerfectWindowEnd?.Invoke();
         public static void ReportOnGoodWindowEnd() => OnGoodWindowEnd?.Invoke();
         public static void ReportOnOKWindowEnd() => OnOKWindowEnd?.Invoke();
+        #endregion Beat
 
+        #region Input
+        public static event Action OnInputPerfect = null;
+
+        public static void ReportOnInputPerfect() => OnInputPerfect?.Invoke();
+        #endregion Input
     }
 }
 

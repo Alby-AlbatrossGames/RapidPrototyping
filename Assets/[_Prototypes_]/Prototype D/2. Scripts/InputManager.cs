@@ -48,6 +48,7 @@ namespace Prototype4
                 case BeatTiming.PERFECT:
                     upFeedback.text = "Perfect!";
                     upFeedback.color = Color.blue;
+                    EventManager.ReportOnInputPerfect();
                     break;
                 default:
                     upFeedback.text = "ERROR";
