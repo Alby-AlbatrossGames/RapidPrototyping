@@ -1,4 +1,4 @@
-using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,33 +7,44 @@ namespace Prototype4
     public class BeatManager : GameBehaviour
     {
         public GameObject testObj;
-        public int bpm = 120;
+        public float bpm;
 
         public float beatTimingValue;
 
-        private float sliderVal;
-        public Slider RightSlider;
-        public Slider LeftSlider;
+        private float visVal;
+        public Slider RightVisualizer;
+        public Slider LeftVisualizer;
+
+        public TMP_Text pauseBPM;
 
         private float beatDuration;
         private void Start()
         {
-            beatDuration = 60f / bpm;
+            SetBPM(12);
             StartBeat();
-            RightSlider.maxValue = beatDuration;
-            LeftSlider.maxValue = beatDuration;
 
         }
-        void SetSliderValues()
+
+        public void SetBPM(float value)
         {
-            RightSlider.value = sliderVal;
-            LeftSlider.value = sliderVal;
+            int newBPM = (int)value * 10;
+            bpm = newBPM;
+            beatDuration = 60f/bpm;
+            pauseBPM.text = newBPM.ToString();
+
+            RightVisualizer.maxValue = beatDuration;
+            LeftVisualizer.maxValue = beatDuration;
+        }
+        void SetVisualizerValues()
+        {
+            RightVisualizer.value = visVal;
+            LeftVisualizer.value = visVal;
         }
 
         private void Update()
         {
-            sliderVal += 1 * Time.deltaTime;
-            SetSliderValues();
+            visVal += 1 * Time.deltaTime;
+            SetVisualizerValues();
         }
 
         private void StartBeat()
@@ -43,7 +54,7 @@ namespace Prototype4
 
             testObj.GetComponent<Renderer>().material.color = Color.blue;
 
-            sliderVal = RightSlider.minValue;
+            visVal = RightVisualizer.minValue;
 
             ExecuteAfterSeconds((beatDuration/8) *1, EndPerfectBeatWindow);
             ExecuteAfterSeconds((beatDuration/8) *2, EndGoodBeatWindow);

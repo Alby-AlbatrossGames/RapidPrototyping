@@ -609,7 +609,7 @@ RectTransform:
   m_Father: {fileID: 22662409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 0.37931034}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1078,8 +1078,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 777723132}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0.37931034}
+  m_AnchorMax: {x: 1, y: 0.37931034}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1668,7 +1668,7 @@ MonoBehaviour:
   m_MinValue: 1
   m_MaxValue: 30
   m_WholeNumbers: 1
-  m_Value: 30
+  m_Value: 12
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -1688,6 +1688,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Prototype4.FollowHandle, Assembly-CSharp
         m_MethodName: SetTextPosition
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1587037938}
+        m_TargetAssemblyTypeName: Prototype4.BeatManager, Assembly-CSharp
+        m_MethodName: SetBPM
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2656,8 +2668,9 @@ MonoBehaviour:
   testObj: {fileID: 519670966}
   bpm: 120
   beatTimingValue: 0
-  RightSlider: {fileID: 921003481}
-  LeftSlider: {fileID: 1525378923}
+  RightVisualizer: {fileID: 921003481}
+  LeftVisualizer: {fileID: 1525378923}
+  pauseBPM: {fileID: 2051742800}
 --- !u!114 &1587037939
 MonoBehaviour:
   m_ObjectHideFlags: 0
