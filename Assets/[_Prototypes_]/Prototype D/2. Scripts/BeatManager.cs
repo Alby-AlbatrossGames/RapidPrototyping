@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,6 @@ namespace Prototype4
 {
     public class BeatManager : GameBehaviour
     {
-        public GameObject testObj;
         public float bpm;
 
         public float beatTimingValue;
@@ -24,7 +24,8 @@ namespace Prototype4
         private int beatCount = 0;
         private EquationGen _EQ;
 
-
+        public GameObject canvas1;
+        public GameObject canvas2;
 
 
         private void Start()
@@ -78,9 +79,11 @@ namespace Prototype4
                 BarTimerSlider.value = BarTimerSlider.maxValue;
             }
 
-            testObj.GetComponent<Renderer>().material.color = Color.blue;
-
             visVal = RightVisualizer.minValue;
+            canvas1.transform.localScale = Vector3.one * 1.03f; //DoScale over beatDuration
+            canvas2.transform.localScale = Vector3.one * 1.03f; //DoScale over beatDuration
+            canvas1.transform.DOScale(Vector3.one,beatDuration * 0.7f);
+            canvas2.transform.DOScale(Vector3.one,beatDuration * 0.7f);
 
             ExecuteAfterSeconds((beatDuration/8) *1, EndPerfectBeatWindow);
             ExecuteAfterSeconds((beatDuration/8) *2, EndGoodBeatWindow);
@@ -90,18 +93,15 @@ namespace Prototype4
         private void EndPerfectBeatWindow()
         {
             EventManager.ReportOnPerfectWindowEnd();
-            testObj.GetComponent<Renderer>().material.color = Color.yellow;
         }
         private void EndGoodBeatWindow()
         {
             EventManager.ReportOnGoodWindowEnd();
-            testObj.GetComponent<Renderer>().material.color = Color.red;
         }
         private void EndOKBeatWindow()
         {
             EventManager.ReportOnOKWindowEnd();
             _EQ.correctSymbol = EquationGen.CorrectSymbol.Waiting;
-            testObj.GetComponent<Renderer>().material.color = Color.red;
         }
 
         #region OnEnable/OnDisable
