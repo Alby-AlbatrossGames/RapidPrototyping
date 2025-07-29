@@ -33,13 +33,32 @@ namespace Prototype4
             EventManager.OnOKWindowEnd += SetTimingMISS;
         }
 
-        void SpawnFeedback(string _txt, Color _clr)
+        void SpawnFeedback(GameObject spawn)
         {
-            //GameObject fdbkTxt = Instantiate(FeedbackText, upFeedbackSpawn.transform.position, upFeedbackSpawn.transform.rotation);
-            
+            string _txt = "ERROR";
+            Color _clr = Color.white;
+            switch (beatTiming)
+            {
+                case BeatTiming.MISS:
+                    _txt = "Miss...";
+                    _clr = Color.red;
+                    break;
+                case BeatTiming.OK:
+                    _txt = "OK!";
+                    _clr = Color.yellow;
+                    break;
+                case BeatTiming.GOOD:
+                    _txt = "Good!";
+                    _clr = Color.green;
+                    break;
+                case BeatTiming.PERFECT:
+                    _txt = "Perfect!";
+                    _clr = Color.blue;
+                    break;
+            }
             GameObject _a = PoolX.GetFromPool(FeedbackText, list);
-            _a.GetComponent<FeedbackText>().Initialize(upFeedbackSpawn.transform.position, _txt, _clr);
-
+            _a.transform.SetParent(spawn.transform, false);
+            _a.GetComponent<FeedbackText>().Initialize(spawn.transform.position, _txt, _clr);
         }
 
         #region Input Actions
@@ -47,103 +66,22 @@ namespace Prototype4
         {
             /*if (_EQ.correctSymbol == EquationGen.CorrectSymbol.Add)
             {*/
-                switch (beatTiming)
-                {
-                    case BeatTiming.MISS:
-                        SpawnFeedback("Miss...", Color.red);
-                        break;
-                    case BeatTiming.OK:
-                        SpawnFeedback("OK!", Color.yellow);
-                        break;
-                    case BeatTiming.GOOD:
-                        SpawnFeedback("Good!", Color.green);
-                        break;
-                    case BeatTiming.PERFECT:
-                        EventManager.ReportOnInputPerfect();
-                        SpawnFeedback("Perfect!", Color.blue);
-                        break;
-                }
+            SpawnFeedback(upFeedbackSpawn);
             /*}*/
             
         }
-        /*void OnDownAction()
+        void OnDownAction()
         {
-            switch (beatTiming)
-            {
-                case BeatTiming.MISS:
-                    downFeedback.text = "Miss...";
-                    downFeedback.color = Color.red;
-                    break;
-                case BeatTiming.OK:
-                    downFeedback.text = "OK!";
-                    downFeedback.color = Color.yellow;
-                    break;
-                case BeatTiming.GOOD:
-                    downFeedback.text = "Good!";
-                    downFeedback.color = Color.green;
-                    break;
-                case BeatTiming.PERFECT:
-                    downFeedback.text = "Perfect!";
-                    downFeedback.color = Color.blue;
-                    break;
-                default:
-                    downFeedback.text = "ERROR";
-                    downFeedback.color = Color.black;
-                    break;
-            }
+            SpawnFeedback(downFeedbackSpawn);
         }
         void OnLeftAction()
         {
-            switch (beatTiming)
-            {
-                case BeatTiming.MISS:
-                    leftFeedback.text = "Miss...";
-                    leftFeedback.color = Color.red;
-                    break;
-                case BeatTiming.OK:
-                    leftFeedback.text = "OK!";
-                    leftFeedback.color = Color.yellow;
-                    break;
-                case BeatTiming.GOOD:
-                    leftFeedback.text = "Good!";
-                    leftFeedback.color = Color.green;
-                    break;
-                case BeatTiming.PERFECT:
-                    leftFeedback.text = "Perfect!";
-                    leftFeedback.color = Color.blue;
-                    break;
-                default:
-                    leftFeedback.text = "ERROR";
-                    leftFeedback.color = Color.black;
-                    break;
-            }
+            SpawnFeedback(leftFeedbackSpawn);
         }
         void OnRightAction()
         {
-            switch (beatTiming)
-            {
-                case BeatTiming.MISS:
-                    rightFeedback.text = "Miss...";
-                    rightFeedback.color = Color.red;
-                    break;
-                case BeatTiming.OK:
-                    rightFeedback.text = "OK!";
-                    rightFeedback.color = Color.yellow;
-                    break;
-                case BeatTiming.GOOD:
-                    rightFeedback.text = "Good!";
-                    rightFeedback.color = Color.green;
-                    break;
-                case BeatTiming.PERFECT:
-                    rightFeedback.text = "Perfect!";
-                    rightFeedback.color = Color.blue;
-                    break;
-                default:
-                    rightFeedback.text = "ERROR";
-                    rightFeedback.color = Color.black;
-                    break;
-            }
-        }*/
+            SpawnFeedback(rightFeedbackSpawn);
+        }
         #endregion Input Actions
     }
 }

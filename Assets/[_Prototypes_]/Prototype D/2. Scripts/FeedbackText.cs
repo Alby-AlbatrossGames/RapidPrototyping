@@ -16,6 +16,6 @@ public class FeedbackText : MonoBehaviour
         text.text = txt;
         text.color = clr;
         transform.position = startPos;
-        transform.DOLocalMoveY(transform.position.y + 20, 0.5f).OnComplete(() => gameObject.SetActive(false));
+        transform.DOLocalMoveY(transform.localPosition.y + 20, 0.5f).OnComplete(() => gameObject.SetActive(false));
     }
 }
