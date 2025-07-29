@@ -1969,11 +1969,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beatTiming: 0
-  upFeedback: {fileID: 499399772}
-  downFeedback: {fileID: 1400143958}
-  leftFeedback: {fileID: 1875311150}
-  rightFeedback: {fileID: 1431107765}
+  upFeedbackSpawn: {fileID: 499399770}
+  downFeedbackSpawn: {fileID: 0}
+  leftFeedbackSpawn: {fileID: 0}
+  rightFeedbackSpawn: {fileID: 0}
   _EQ: {fileID: 1587037940}
+  FeedbackText: {fileID: 4671017229826432810, guid: a74d9b912918c9d4992f6e9364ff2c97, type: 3}
+  list: []
 --- !u!114 &1217966046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3113,7 +3115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -37, y: 0}
+  m_AnchoredPosition: {x: -44, y: 0}
   m_SizeDelta: {x: 20, y: 160}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1525378923

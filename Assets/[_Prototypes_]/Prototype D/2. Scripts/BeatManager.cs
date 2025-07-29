@@ -79,7 +79,6 @@ namespace Prototype4
             ExecuteAfterSeconds((beatDuration/8) *1, EndPerfectBeatWindow);
             ExecuteAfterSeconds((beatDuration/8) *2, EndGoodBeatWindow);
             ExecuteAfterSeconds((beatDuration/8) *4, EndOKBeatWindow);
-            // ExecuteAfterSeconds((beatDuration / 8) * 7, StartPerfectBeatWindow);
             ExecuteAfterSeconds(beatDuration, StartBeat);
         }
         private void EndPerfectBeatWindow()
@@ -96,14 +95,10 @@ namespace Prototype4
         {
             EventManager.ReportOnOKWindowEnd();
             _EQ.correctSymbol = EquationGen.CorrectSymbol.Waiting;
-            //testObj.GetComponent<Renderer>().material.color = Color.red;
+            testObj.GetComponent<Renderer>().material.color = Color.red;
         }
-        /*private void StartPerfectBeatWindow()
-        {
-            EventManager.ReportOnWindowStart();
-            testObj.GetComponent<Renderer>().material.color = Color.blue;
-        }*/
 
+        #region OnEnable/OnDisable
         private void OnEnable()
         {
             EventManager.OnBarComplete += LoadNewEquation;
@@ -112,7 +107,7 @@ namespace Prototype4
         {
             EventManager.OnBarComplete -= LoadNewEquation;
         }
-
+        #endregion OnEnable/OnDisable
     }
 }
 
