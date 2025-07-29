@@ -15,6 +15,8 @@ namespace Prototype4
         public Slider RightVisualizer;
         public Slider LeftVisualizer;
 
+        public Slider BarTimerSlider;
+
         public TMP_Text pauseBPM;
 
         private float beatDuration;
@@ -28,6 +30,7 @@ namespace Prototype4
         private void Start()
         {
             SetBPM(12);
+            BarTimerSlider.value = BarTimerSlider.maxValue;
             StartBeat();
             _EQ = FindFirstObjectByType<EquationGen>();
         }
@@ -41,6 +44,7 @@ namespace Prototype4
 
             RightVisualizer.maxValue = beatDuration;
             LeftVisualizer.maxValue = beatDuration;
+            BarTimerSlider.maxValue = beatDuration * 4;
         }
         void SetVisualizerValues()
         {
@@ -50,6 +54,7 @@ namespace Prototype4
 
         private void Update()
         {
+            BarTimerSlider.value -= 0.95f * Time.deltaTime;
             visVal += 1 * Time.deltaTime;
             SetVisualizerValues();
         }
@@ -70,6 +75,7 @@ namespace Prototype4
             {
                 EventManager.ReportOnBarComplete();
                 beatCount = 1;
+                BarTimerSlider.value = BarTimerSlider.maxValue;
             }
 
             testObj.GetComponent<Renderer>().material.color = Color.blue;
