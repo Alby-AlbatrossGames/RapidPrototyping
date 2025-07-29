@@ -10,10 +10,17 @@ public class EquationGen : MonoBehaviour
 
     public enum CorrectSymbol { Add, Subtract, Multiply, Divide, Waiting }
     public CorrectSymbol correctSymbol = CorrectSymbol.Waiting;
+    private void Start()
+    {
+        GenerateEquation();
+    }
     public void GenerateEquation()
     {
-        /*int coinflip = Random.Range(1, 3))
-        if ( ( == 1) {
+        /*int coinflip = Random.Range(1, 5))
+         * 1 = addition
+         * 2 = subtraction
+         * 3 = multiplication
+         * 4 = division
 
         }*/
 

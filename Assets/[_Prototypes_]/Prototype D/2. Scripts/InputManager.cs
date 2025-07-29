@@ -25,6 +25,15 @@ namespace Prototype4
         public GameObject FeedbackText;
         public List<GameObject> list;
 
+        public int lives = 3;
+        public int multi = 0;
+        public int score = 0;
+
+        private void Start()
+        {
+            lives = 3; multi = 0; score = 0;
+        }
+
         void SetTimingPERFECT() => beatTiming = BeatTiming.PERFECT;
         void SetTimingGOOD() => beatTiming = BeatTiming.GOOD;
         void SetTimingOK() => beatTiming = BeatTiming.OK;
@@ -47,18 +56,32 @@ namespace Prototype4
                 case BeatTiming.MISS:
                     _txt = "Miss...";
                     _clr = Color.red;
+                    lives -= 1;
+                    Debug.Log("Lives: "+lives);
+                    if (lives <= 0)
+                    {
+                        Debug.Log("Game Over!");
+                        Debug.Log("Correct Answers: "+multi);
+                        Debug.Log("Score: "+score);
+                    }
                     break;
                 case BeatTiming.OK:
                     _txt = "OK!";
                     _clr = Color.yellow;
+                    multi += 1;
+                    score += 1;
                     break;
                 case BeatTiming.GOOD:
                     _txt = "Good!";
                     _clr = Color.green;
+                    multi += 1;
+                    score += 3;
                     break;
                 case BeatTiming.PERFECT:
                     _txt = "Perfect!";
                     _clr = Color.blue;
+                    multi += 1;
+                    score += 5;
                     break;
             }
             GameObject _a = PoolX.GetFromPool(FeedbackText, list);
@@ -75,11 +98,12 @@ namespace Prototype4
         #region Input Actions
         public void OnUpAction() //Addition
         {
-            /*if (_EQ.correctSymbol == EquationGen.CorrectSymbol.Add)
-            {*/
-            SpawnFeedback(upFeedbackSpawn);
-            SetBtnColour(upButton);
-            /*}*/
+            if (_EQ.correctSymbol == EquationGen.CorrectSymbol.Add)
+            {
+                SpawnFeedback(upFeedbackSpawn);
+                SetBtnColour(upButton);
+                _EQ.correctSymbol = EquationGen.CorrectSymbol.Waiting;
+            }
             
         }
         void OnDownAction()

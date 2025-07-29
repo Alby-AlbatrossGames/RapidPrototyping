@@ -101,7 +101,6 @@ namespace Prototype4
         private void EndOKBeatWindow()
         {
             EventManager.ReportOnOKWindowEnd();
-            _EQ.correctSymbol = EquationGen.CorrectSymbol.Waiting;
         }
 
         #region OnEnable/OnDisable
