@@ -15,6 +15,8 @@ namespace Prototype4
         public TMP_Text leftFeedback;
         public TMP_Text rightFeedback;
 
+        public EquationGen _EQ;
+
         void SetTimingPERFECT() => beatTiming = BeatTiming.PERFECT;
         void SetTimingGOOD() => beatTiming = BeatTiming.GOOD;
         void SetTimingOK() => beatTiming = BeatTiming.OK;
@@ -29,32 +31,36 @@ namespace Prototype4
         }
 
         #region Input Actions
-        public void OnUpAction()
+        public void OnUpAction() //Addition
         {
-            switch (beatTiming)
+            if (_EQ.correctSymbol == EquationGen.CorrectSymbol.Add)
             {
-                case BeatTiming.MISS:
-                    upFeedback.text = "Miss...";
-                    upFeedback.color = Color.red;
-                    break;
-                case BeatTiming.OK:
-                    upFeedback.text = "OK";
-                    upFeedback.color = Color.yellow;
-                    break;
-                case BeatTiming.GOOD:
-                    upFeedback.text = "Good!";
-                    upFeedback.color = Color.green;
-                    break;
-                case BeatTiming.PERFECT:
-                    upFeedback.text = "Perfect!";
-                    upFeedback.color = Color.blue;
-                    EventManager.ReportOnInputPerfect();
-                    break;
-                default:
-                    upFeedback.text = "ERROR";
-                    upFeedback.color = Color.black;
-                    break;
+                switch (beatTiming)
+                {
+                    case BeatTiming.MISS:
+                        upFeedback.text = "Miss...";
+                        upFeedback.color = Color.red;
+                        break;
+                    case BeatTiming.OK:
+                        upFeedback.text = "OK";
+                        upFeedback.color = Color.yellow;
+                        break;
+                    case BeatTiming.GOOD:
+                        upFeedback.text = "Good!";
+                        upFeedback.color = Color.green;
+                        break;
+                    case BeatTiming.PERFECT:
+                        upFeedback.text = "Perfect!";
+                        upFeedback.color = Color.blue;
+                        EventManager.ReportOnInputPerfect();
+                        break;
+                    default:
+                        upFeedback.text = "ERROR";
+                        upFeedback.color = Color.black;
+                        break;
+                }
             }
+            
         }
         void OnDownAction()
         {

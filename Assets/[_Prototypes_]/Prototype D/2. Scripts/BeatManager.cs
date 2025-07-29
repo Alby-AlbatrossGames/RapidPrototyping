@@ -18,11 +18,18 @@ namespace Prototype4
         public TMP_Text pauseBPM;
 
         private float beatDuration;
+
+        private int beatCount = 0;
+        private EquationGen _EQ;
+
+
+
+
         private void Start()
         {
             SetBPM(12);
             StartBeat();
-
+            _EQ = FindFirstObjectByType<EquationGen>();
         }
 
         public void SetBPM(float value)
@@ -47,10 +54,23 @@ namespace Prototype4
             SetVisualizerValues();
         }
 
+        private void LoadNewEquation()
+        {
+            _EQ.GenerateEquation();
+        }
+
         private void StartBeat()
         {
-            Debug.Log("Beat Start");
             EventManager.ReportOnBeatStart();
+
+            if (beatCount < 4)
+            {
+                beatCount++;
+            }else
+            {
+                EventManager.ReportOnBarComplete();
+                beatCount = 1;
+            }
 
             testObj.GetComponent<Renderer>().material.color = Color.blue;
 
@@ -75,6 +95,7 @@ namespace Prototype4
         private void EndOKBeatWindow()
         {
             EventManager.ReportOnOKWindowEnd();
+            _EQ.correctSymbol = EquationGen.CorrectSymbol.Waiting;
             //testObj.GetComponent<Renderer>().material.color = Color.red;
         }
         /*private void StartPerfectBeatWindow()
@@ -82,6 +103,16 @@ namespace Prototype4
             EventManager.ReportOnWindowStart();
             testObj.GetComponent<Renderer>().material.color = Color.blue;
         }*/
+
+        private void OnEnable()
+        {
+            EventManager.OnBarComplete += LoadNewEquation;
+        }
+        private void OnDisable()
+        {
+            EventManager.OnBarComplete -= LoadNewEquation;
+        }
+
     }
 }
 
