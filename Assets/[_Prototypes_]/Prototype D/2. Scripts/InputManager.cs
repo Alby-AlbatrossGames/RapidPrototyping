@@ -1,20 +1,25 @@
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace Prototype4
 {
     
     
-    public class InputManager : MonoBehaviour
+    public class InputManager : GameBehaviour
     {
         public enum BeatTiming { MISS, PERFECT, GOOD, OK }
         public BeatTiming beatTiming = BeatTiming.MISS;
 
         public GameObject upFeedbackSpawn;
+        public Image upButton;
         public GameObject downFeedbackSpawn;
+        public Image downButton;
         public GameObject leftFeedbackSpawn;
+        public Image leftButton;
         public GameObject rightFeedbackSpawn;
+        public Image rightButton;
 
         public EquationGen _EQ;
         public GameObject FeedbackText;
@@ -60,6 +65,12 @@ namespace Prototype4
             _a.transform.SetParent(spawn.transform, false);
             _a.GetComponent<FeedbackText>().Initialize(spawn.transform.position, _txt, _clr);
         }
+        void SetBtnColour(Image button)
+        {
+            Color defClr = button.color;
+            button.color = new Color(defClr.r - 0.3f, defClr.g - 0.3f, defClr.b - 0.3f);
+            ExecuteAfterSeconds(0.1f, () => button.color = defClr); //SpriteRenderer colors are 0-1, not 0-255.
+        }
 
         #region Input Actions
         public void OnUpAction() //Addition
@@ -67,20 +78,24 @@ namespace Prototype4
             /*if (_EQ.correctSymbol == EquationGen.CorrectSymbol.Add)
             {*/
             SpawnFeedback(upFeedbackSpawn);
+            SetBtnColour(upButton);
             /*}*/
             
         }
         void OnDownAction()
         {
             SpawnFeedback(downFeedbackSpawn);
+            SetBtnColour(downButton);
         }
         void OnLeftAction()
         {
             SpawnFeedback(leftFeedbackSpawn);
+            SetBtnColour(leftButton);
         }
         void OnRightAction()
         {
             SpawnFeedback(rightFeedbackSpawn);
+            SetBtnColour(rightButton);
         }
         #endregion Input Actions
     }
