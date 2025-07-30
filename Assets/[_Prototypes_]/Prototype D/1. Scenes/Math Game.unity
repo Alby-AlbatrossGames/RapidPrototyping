@@ -3889,6 +3889,7 @@ MonoBehaviour:
   answerText: {fileID: 1286091544}
   num1Text: {fileID: 1233046258}
   num2Text: {fileID: 1307474228}
+  symbolText: {fileID: 1680123927}
   correctSymbol: 4
 --- !u!1 &1656660276
 GameObject:

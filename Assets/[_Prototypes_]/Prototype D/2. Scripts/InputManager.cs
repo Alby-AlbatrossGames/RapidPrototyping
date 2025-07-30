@@ -29,6 +29,11 @@ namespace Prototype4
         public int multi = 0;
         public int score = 0;
 
+        private bool upActive = true;
+        private bool downActive = true;
+        private bool leftActive = true;
+        private bool rightActive = true;
+
         private void Start()
         {
             lives = 3; multi = 0; score = 0;
@@ -42,51 +47,82 @@ namespace Prototype4
         private void OnEnable()
         {
             EventManager.OnBeatStart += SetTimingPERFECT;
+            EventManager.OnBarComplete += ActivateInput;
             EventManager.OnPerfectWindowEnd += SetTimingGOOD;
             EventManager.OnGoodWindowEnd += SetTimingOK;
             EventManager.OnOKWindowEnd += SetTimingMISS;
         }
 
-        void SpawnFeedback(GameObject spawn)
+        void ActivateInput()
+        {
+            upActive = true;
+            downActive = true;
+            leftActive = true;
+            rightActive = true;
+        }
+        void DeActivateInput()
+        {
+            upActive = false;
+            downActive = false;
+            leftActive = false;
+            rightActive = false;
+            _EQ.ShowAnswer();
+        }
+
+        void SpawnFeedback(GameObject spawn, bool missed = false)
         {
             string _txt = "ERROR";
             Color _clr = Color.white;
-            switch (beatTiming)
+
+            if (missed)
             {
-                case BeatTiming.MISS:
-                    _txt = "Miss...";
-                    _clr = Color.red;
-                    lives -= 1;
-                    Debug.Log("Lives: "+lives);
-                    if (lives <= 0)
-                    {
-                        Debug.Log("Game Over!");
-                        Debug.Log("Correct Answers: "+multi);
-                        Debug.Log("Score: "+score);
-                    }
-                    break;
-                case BeatTiming.OK:
-                    _txt = "OK!";
-                    _clr = Color.yellow;
-                    multi += 1;
-                    score += 1;
-                    break;
-                case BeatTiming.GOOD:
-                    _txt = "Good!";
-                    _clr = Color.green;
-                    multi += 1;
-                    score += 3;
-                    break;
-                case BeatTiming.PERFECT:
-                    _txt = "Perfect!";
-                    _clr = Color.blue;
-                    multi += 1;
-                    score += 5;
-                    break;
+                _txt = "Incorrect";
+                _clr = Color.red;
+                lives -= 1;
+                Debug.Log("Lives: " + lives);
+            }else
+            {
+                switch (beatTiming)
+                {
+                    case BeatTiming.MISS:
+                        _txt = "Miss...";
+                        _clr = Color.red;
+                        lives -= 1;
+                        Debug.Log("Lives: " + lives);
+                        break;
+                    case BeatTiming.OK:
+                        _txt = "OK!";
+                        _clr = Color.yellow;
+                        multi += 1;
+                        score += 1;
+                        break;
+                    case BeatTiming.GOOD:
+                        _txt = "Good!";
+                        _clr = Color.green;
+                        multi += 1;
+                        score += 3;
+                        break;
+                    case BeatTiming.PERFECT:
+                        _txt = "Perfect!";
+                        _clr = Color.blue;
+                        multi += 1;
+                        score += 5;
+                        break;
+                }
             }
+
+            
             GameObject _a = PoolX.GetFromPool(FeedbackText, list);
             _a.transform.SetParent(spawn.transform, false);
             _a.GetComponent<FeedbackText>().Initialize(spawn.transform.position, _txt, _clr);
+
+            if (lives <= 0)
+            {
+                Time.timeScale = 0;
+                Debug.Log("Game Over!");
+                Debug.Log("Correct Answers: " + multi);
+                Debug.Log("Score: " + score);
+            }
         }
         void SetBtnColour(Image button)
         {
@@ -96,30 +132,77 @@ namespace Prototype4
         }
 
         #region Input Actions
-        public void OnUpAction() //Addition
+        public void OnUpAction()
         {
-            if (_EQ.correctSymbol == EquationGen.CorrectSymbol.Add)
+            if (upActive)
             {
-                SpawnFeedback(upFeedbackSpawn);
-                SetBtnColour(upButton);
-                _EQ.correctSymbol = EquationGen.CorrectSymbol.Waiting;
+                if (_EQ.correctSymbol == EquationGen.CorrectSymbol.Add)
+                {
+                    SpawnFeedback(upFeedbackSpawn);
+                    SetBtnColour(upButton);
+                    _EQ.correctSymbol = EquationGen.CorrectSymbol.Waiting;
+                }
+                else
+                {
+                    SpawnFeedback(upFeedbackSpawn, true);
+                    SetBtnColour(upButton);
+                }
             }
-            
+            DeActivateInput();
         }
         void OnDownAction()
         {
-            SpawnFeedback(downFeedbackSpawn);
-            SetBtnColour(downButton);
+            if (downActive)
+            {
+                if (_EQ.correctSymbol == EquationGen.CorrectSymbol.Subtract)
+                {
+                    SpawnFeedback(downFeedbackSpawn);
+                    SetBtnColour(downButton);
+                    _EQ.correctSymbol = EquationGen.CorrectSymbol.Waiting;
+                }
+                else
+                {
+                    SpawnFeedback(downFeedbackSpawn, true);
+                    SetBtnColour(downButton);
+                }
+            }
+            DeActivateInput();
         }
         void OnLeftAction()
         {
-            SpawnFeedback(leftFeedbackSpawn);
-            SetBtnColour(leftButton);
+            if (leftActive)
+            {
+                if (_EQ.correctSymbol == EquationGen.CorrectSymbol.Multiply)
+                {
+                    SpawnFeedback(leftFeedbackSpawn);
+                    SetBtnColour(leftButton);
+                    _EQ.correctSymbol = EquationGen.CorrectSymbol.Waiting;
+                }
+                else
+                {
+                    SpawnFeedback(leftFeedbackSpawn, true);
+                    SetBtnColour(leftButton);
+                }
+            }
+            DeActivateInput();
         }
         void OnRightAction()
         {
-            SpawnFeedback(rightFeedbackSpawn);
-            SetBtnColour(rightButton);
+            if (rightActive)
+            {
+                if (_EQ.correctSymbol == EquationGen.CorrectSymbol.Divide)
+                {
+                    SpawnFeedback(rightFeedbackSpawn);
+                    SetBtnColour(rightButton);
+                    _EQ.correctSymbol = EquationGen.CorrectSymbol.Waiting;
+                }
+                else
+                {
+                    SpawnFeedback(rightFeedbackSpawn, true);
+                    SetBtnColour(rightButton);
+                }
+            }
+            DeActivateInput();
         }
         #endregion Input Actions
     }

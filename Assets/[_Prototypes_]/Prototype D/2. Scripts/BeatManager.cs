@@ -30,7 +30,7 @@ namespace Prototype4
 
         private void Start()
         {
-            SetBPM(12);
+            SetBPM(8);
             BarTimerSlider.value = BarTimerSlider.maxValue;
             StartBeat();
             _EQ = FindFirstObjectByType<EquationGen>();
