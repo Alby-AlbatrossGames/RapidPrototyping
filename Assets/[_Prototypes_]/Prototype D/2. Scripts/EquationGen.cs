@@ -9,6 +9,8 @@ public class EquationGen : GameBehaviour
     public TMP_Text num2Text;
     public TMP_Text symbolText;
 
+    private string correct;
+
     public enum CorrectSymbol { Add, Subtract, Multiply, Divide, Waiting }
     public CorrectSymbol correctSymbol = CorrectSymbol.Waiting;
     private void Start()
@@ -39,6 +41,7 @@ public class EquationGen : GameBehaviour
     void AddGen(int num1, int num2)
     {
         correctSymbol = CorrectSymbol.Add;
+        correct = "+";
         float ans = num1 + num2;
 
         num1Text.text = num1.ToString();
@@ -50,6 +53,7 @@ public class EquationGen : GameBehaviour
     void SubtractGen(int num1, int num2)
     {
         correctSymbol = CorrectSymbol.Subtract;
+        correct = "-";
         float ans = num1 - num2;
 
         num1Text.text = num1.ToString();
@@ -62,6 +66,7 @@ public class EquationGen : GameBehaviour
     void MultiplyGen(int num1, int num2)
     {
         correctSymbol = CorrectSymbol.Multiply;
+        correct = "x";
         float ans = num1 * num2;
 
         num1Text.text = num1.ToString();
@@ -74,6 +79,7 @@ public class EquationGen : GameBehaviour
     void DivideGen(int num1, int num2)
     {
         correctSymbol = CorrectSymbol.Divide;
+        correct = "/";
         float ans = num1 / num2;
 
         num1Text.text = num1.ToString();
@@ -85,21 +91,7 @@ public class EquationGen : GameBehaviour
 
     public void ShowAnswer()
     {
-        switch (correctSymbol)
-        {
-            case CorrectSymbol.Add:
-                symbolText.text = "+";
-                break;
-            case CorrectSymbol.Subtract:
-                symbolText.text = "-";
-                break;
-            case CorrectSymbol.Multiply:
-                symbolText.text = "x";
-                break;
-            case CorrectSymbol.Divide:
-                symbolText.text = "/";
-                break;
-        }
+        symbolText.text = correct;
     }
 
     int RNGPosNumGen() => Random.Range(1, 11);
