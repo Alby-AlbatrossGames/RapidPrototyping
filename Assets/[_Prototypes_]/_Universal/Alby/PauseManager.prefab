@@ -198,6 +198,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  pauseBG: {fileID: 0}
 --- !u!1 &2441617866027169480
 GameObject:
   m_ObjectHideFlags: 0
@@ -2042,10 +2043,10 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 8285279398983451698}
-          m_TargetAssemblyTypeName: PauseButtonBehaviour, Assembly-CSharp
-          m_MethodName: Submit
-          m_Mode: 1
+        - m_Target: {fileID: 1717087066756918346}
+          m_TargetAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_MethodName: OnSubmit
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

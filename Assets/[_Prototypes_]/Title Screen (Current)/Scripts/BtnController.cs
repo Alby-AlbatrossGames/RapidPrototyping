@@ -28,27 +28,27 @@ namespace MainMenu
             {
                 case ButtonID.p1:
                     GrowButton(0);
-                    title.text = "P1 | Playground";
+                    title.text = "Proto 1 | Ball Brief";
                     break;
 
                 case ButtonID.p2:
                     GrowButton(1);
-                    title.text = "P2 | Tree Brief";
+                    title.text = "Proto 2 | Tree Brief";
                     break;
 
                 case ButtonID.p3:
                     GrowButton(2);
-                    title.text = "P3 | Pivot Brief";
+                    title.text = "Proto 3 | Pivot Brief";
                     break;
 
                 case ButtonID.p4:
                     GrowButton(3);
-                    title.text = "Coming Soon...";
+                    title.text = "Proto 4 | Math Brief";
                     break;
 
                 case ButtonID.p5:
                     GrowButton(4);
-                    title.text = "Coming Soon...";
+                    title.text = "Grove Keeper | Coming Soon...";
                     break;
             }
         }

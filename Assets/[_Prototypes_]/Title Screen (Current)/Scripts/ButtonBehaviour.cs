@@ -34,7 +34,7 @@ namespace MainMenu
                     LoadSceneByName("Pivot Game");
                     return;
                 case ButtonID.p4:
-                    //Add 4th Game
+                    LoadSceneByName("Math Game");
                     return;
                 case ButtonID.p5:
                     //Add 5th Game

@@ -17,8 +17,6 @@ namespace Prototype4
 
         public Slider BarTimerSlider;
 
-        public TMP_Text pauseBPM;
-
         private float beatDuration;
 
         private int beatCount = 0;
@@ -30,9 +28,8 @@ namespace Prototype4
 
         private void Start()
         {
-            SetBPM(8);
+            //setbpm(8)
             BarTimerSlider.value = BarTimerSlider.maxValue;
-            StartBeat();
             _EQ = FindFirstObjectByType<EquationGen>();
         }
 
@@ -41,11 +38,12 @@ namespace Prototype4
             int newBPM = (int)value * 10;
             bpm = newBPM;
             beatDuration = 60f/bpm;
-            pauseBPM.text = newBPM.ToString();
 
             RightVisualizer.maxValue = beatDuration;
             LeftVisualizer.maxValue = beatDuration;
             BarTimerSlider.maxValue = beatDuration * 4;
+            BarTimerSlider.value = BarTimerSlider.maxValue;
+            StartBeat();
         }
         void SetVisualizerValues()
         {
