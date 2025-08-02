@@ -84,9 +84,11 @@ namespace Prototype4
                 Debug.Log("Got: B-" + beatCount);
                 beatCount = 1;
                 Debug.Log("Set: B-" + beatCount + " | Played 2x");
-                BarTimerSlider.value = BarTimerSlider.maxValue;
                 ExecuteAfterSeconds((beatDuration / 8) * 4, () => PlaySound(audio1));
-                ExecuteAfterSeconds(beatDuration, () => EventManager.ReportOnBarComplete());
+                ExecuteAfterSeconds(beatDuration, () => {
+                    EventManager.ReportOnBarComplete();
+                    BarTimerSlider.value = BarTimerSlider.maxValue;
+                });
                 
             }
 
