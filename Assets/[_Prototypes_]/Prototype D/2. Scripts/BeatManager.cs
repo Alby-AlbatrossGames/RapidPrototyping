@@ -25,6 +25,10 @@ namespace Prototype4
         public GameObject canvas1;
         public GameObject canvas2;
 
+        public AudioSource audio1;
+        public AudioSource audio2;
+        public AudioSource audio3;
+
 
         private void Start()
         {
@@ -66,6 +70,7 @@ namespace Prototype4
         private void StartBeat()
         {
             EventManager.ReportOnBeatStart();
+            audio1.Play();
 
             if (beatCount < 4)
             {
@@ -86,20 +91,25 @@ namespace Prototype4
             ExecuteAfterSeconds((beatDuration/8) *1, EndPerfectBeatWindow);
             ExecuteAfterSeconds((beatDuration/8) *2, EndGoodBeatWindow);
             ExecuteAfterSeconds((beatDuration/8) *4, EndOKBeatWindow);
+            ExecuteAfterSeconds((beatDuration/8) *5, PlayLastSound);
             ExecuteAfterSeconds(beatDuration, StartBeat);
         }
         private void EndPerfectBeatWindow()
         {
             EventManager.ReportOnPerfectWindowEnd();
+
         }
         private void EndGoodBeatWindow()
         {
             EventManager.ReportOnGoodWindowEnd();
+            audio2.Play();
         }
         private void EndOKBeatWindow()
         {
             EventManager.ReportOnOKWindowEnd();
+            audio3.Play();
         }
+        private void PlayLastSound() => audio2.Play();
 
         #region OnEnable/OnDisable
         private void OnEnable()

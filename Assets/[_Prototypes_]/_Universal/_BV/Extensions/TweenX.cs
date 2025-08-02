@@ -71,11 +71,11 @@ public static class TweenX
     /// <param name="_duration"></param>
     /// <param name="_ease"></param>
     /// <param name="_format"></param>
-    public static void TweenNumbers(TMPro.TMP_Text _text, float _startValue, float _endValue, float _duration = 1f, Ease _ease = Ease.InOutSine, string _format = "F0")
+    public static void TweenNumbers(TMPro.TMP_Text _text, float _startValue, float _endValue, float _duration = 1f, Ease _ease = Ease.InOutSine, string _format = "F0", bool _setUpdate = false)
     {
         DOTween.To(() => _startValue, x => _startValue = x, _endValue, _duration).SetEase(_ease).OnUpdate(() =>
         {
             _text.text = _startValue.ToString(_format);
-        });
+        }).SetUpdate(_setUpdate);
     }
 }

@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace Prototype4
 {
@@ -25,18 +26,36 @@ namespace Prototype4
         public GameObject FeedbackText;
         public List<GameObject> list;
 
-        public int lives = 3;
-        public int multi = 0;
-        public int score = 0;
+
 
         private bool upActive = true;
         private bool downActive = true;
         private bool leftActive = true;
         private bool rightActive = true;
 
+        #region score variables
+        [Header("Score")]
+        public int lives = 3;
+        public int score = 0;
+        public GameObject eqPanel;
+        public GameObject feedbackCanvas;
+
+        public TMP_Text perfectCountTXT;
+        public int perfectCount;
+        public TMP_Text goodCountTXT;
+        public int goodCount;
+        public TMP_Text okCountTXT;
+        public int okCount;
+        public TMP_Text missCountTXT;
+        public int missCount;
+        public TMP_Text scoreTXT;
+        #endregion score variables
+
+        public GameObject endgameUI;
+
         private void Start()
         {
-            lives = 3; multi = 0; score = 0;
+            lives = 3; score = 0;
         }
 
         void SetTimingPERFECT() => beatTiming = BeatTiming.PERFECT;
@@ -87,25 +106,24 @@ namespace Prototype4
                     case BeatTiming.MISS:
                         _txt = "Miss...";
                         _clr = Color.red;
-                        lives -= 1;
-                        Debug.Log("Lives: " + lives);
+                        missCount += 1;
                         break;
                     case BeatTiming.OK:
-                        _txt = "OK!";
+                        _txt = "OK!  +1";
                         _clr = Color.yellow;
-                        multi += 1;
+                        okCount += 1;
                         score += 1;
                         break;
                     case BeatTiming.GOOD:
-                        _txt = "Good!";
+                        _txt = "Good!  +3";
                         _clr = Color.green;
-                        multi += 1;
+                        goodCount += 1;
                         score += 3;
                         break;
                     case BeatTiming.PERFECT:
-                        _txt = "Perfect!";
+                        _txt = "Perfect!  +5";
                         _clr = Color.blue;
-                        multi += 1;
+                        perfectCount += 1;
                         score += 5;
                         break;
                 }
@@ -119,9 +137,7 @@ namespace Prototype4
             if (lives <= 0)
             {
                 Time.timeScale = 0;
-                Debug.Log("Game Over!");
-                Debug.Log("Correct Answers: " + multi);
-                Debug.Log("Score: " + score);
+                ShowGameOver();
             }
         }
         void SetBtnColour(Image button)
@@ -130,6 +146,24 @@ namespace Prototype4
             button.color = new Color(defClr.r - 0.3f, defClr.g - 0.3f, defClr.b - 0.3f);
             ExecuteAfterSeconds(0.1f, () => button.color = defClr); //SpriteRenderer colors are 0-1, not 0-255.
         }
+
+        void ShowGameOver()
+        {
+            eqPanel.SetActive(false);
+            feedbackCanvas.SetActive(false);
+            ToggleEndUI();
+
+            ExecuteAfterFrames(3, () =>
+            {
+                TweenX.TweenNumbers(perfectCountTXT, 99f, (float)perfectCount, 1f, Ease.InCubic, "F0" , true);
+                TweenX.TweenNumbers(goodCountTXT, 99f, (float)goodCount, 1f, Ease.InCubic, "F0", true);
+                TweenX.TweenNumbers(okCountTXT, 99f, (float)okCount, 1f, Ease.InCubic, "F0", true);
+                TweenX.TweenNumbers(missCountTXT, 99f, (float)missCount, 1f, Ease.InCubic, "F0", true);
+                TweenX.TweenNumbers(scoreTXT, 999f, (float)score, 1.5f, Ease.InCubic, "F0", true);
+            });
+        }
+
+        void ToggleEndUI () => endgameUI.SetActive(!endgameUI.activeSelf);
 
         #region Input Actions
         public void OnUpAction()
