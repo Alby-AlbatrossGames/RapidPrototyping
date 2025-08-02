@@ -7120,7 +7120,11 @@ MonoBehaviour:
   bpm: 120
   beatTimingValue: 0
   RightVisualizer: {fileID: 921003481}
+  RightVisFill: {fileID: 2087731952}
   LeftVisualizer: {fileID: 1525378923}
+  LeftVisFill: {fileID: 232846593}
+  defaultVisColor: {r: 0, g: 0, b: 0, a: 0}
+  currentVisColor: {r: 0, g: 0, b: 0, a: 0}
   BarTimerSlider: {fileID: 280065533}
   canvas1: {fileID: 2114701664}
   canvas2: {fileID: 1289924844}

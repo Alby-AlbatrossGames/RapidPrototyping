@@ -13,7 +13,11 @@ namespace Prototype4
 
         private float visVal;
         public Slider RightVisualizer;
+        public Image RightVisFill;
         public Slider LeftVisualizer;
+        public Image LeftVisFill;
+        public Color defaultVisColor;
+        public Color currentVisColor;
 
         public Slider BarTimerSlider;
 
@@ -32,6 +36,7 @@ namespace Prototype4
 
         private void Start()
         {
+            defaultVisColor = RightVisFill.color;
             beatCount = 1;
             //setbpm(8)
             BarTimerSlider.value = BarTimerSlider.maxValue;
@@ -60,6 +65,8 @@ namespace Prototype4
         {
             BarTimerSlider.value -= 0.95f * Time.deltaTime;
             visVal += 1 * Time.deltaTime;
+            RightVisFill.color = currentVisColor;
+            LeftVisFill.color = currentVisColor;
             SetVisualizerValues();
         }
 
@@ -91,6 +98,7 @@ namespace Prototype4
                 });
                 
             }
+            currentVisColor = defaultVisColor; 
 
             visVal = RightVisualizer.minValue;
             canvas1.transform.localScale = Vector3.one * 1.03f; //DoScale over beatDuration
@@ -115,6 +123,7 @@ namespace Prototype4
         private void EndOKBeatWindow()
         {
             EventManager.ReportOnOKWindowEnd();
+            currentVisColor = Color.red;
         }
         private void PlaySound(AudioSource _src) => _src.Play();
 
