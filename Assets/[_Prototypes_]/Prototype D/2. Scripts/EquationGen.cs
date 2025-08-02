@@ -19,6 +19,7 @@ public class EquationGen : GameBehaviour
     }
     public void GenerateEquation()
     {
+        Debug.Log("New Equation Generated");
         symbolText.text = "?";
         int coinflip = Random.Range(1, 5);
 

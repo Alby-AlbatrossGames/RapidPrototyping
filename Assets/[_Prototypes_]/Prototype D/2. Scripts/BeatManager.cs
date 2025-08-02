@@ -19,7 +19,7 @@ namespace Prototype4
 
         private float beatDuration;
 
-        private int beatCount = 0;
+        private int beatCount;
         private EquationGen _EQ;
 
         public GameObject canvas1;
@@ -32,6 +32,7 @@ namespace Prototype4
 
         private void Start()
         {
+            beatCount = 1;
             //setbpm(8)
             BarTimerSlider.value = BarTimerSlider.maxValue;
             _EQ = FindFirstObjectByType<EquationGen>();
@@ -70,16 +71,23 @@ namespace Prototype4
         private void StartBeat()
         {
             EventManager.ReportOnBeatStart();
-            audio1.Play();
+            PlaySound(audio1);
 
             if (beatCount < 4)
             {
+                Debug.Log("Got: B-"+beatCount);
                 beatCount++;
+                Debug.Log("Set: B-"+beatCount);
             }else
             {
-                EventManager.ReportOnBarComplete();
+                ;
+                Debug.Log("Got: B-" + beatCount);
                 beatCount = 1;
+                Debug.Log("Set: B-" + beatCount + " | Played 2x");
                 BarTimerSlider.value = BarTimerSlider.maxValue;
+                ExecuteAfterSeconds((beatDuration / 8) * 4, () => PlaySound(audio1));
+                ExecuteAfterSeconds(beatDuration, () => EventManager.ReportOnBarComplete());
+                
             }
 
             visVal = RightVisualizer.minValue;
@@ -91,7 +99,6 @@ namespace Prototype4
             ExecuteAfterSeconds((beatDuration/8) *1, EndPerfectBeatWindow);
             ExecuteAfterSeconds((beatDuration/8) *2, EndGoodBeatWindow);
             ExecuteAfterSeconds((beatDuration/8) *4, EndOKBeatWindow);
-            ExecuteAfterSeconds((beatDuration/8) *5, PlayLastSound);
             ExecuteAfterSeconds(beatDuration, StartBeat);
         }
         private void EndPerfectBeatWindow()
@@ -102,14 +109,12 @@ namespace Prototype4
         private void EndGoodBeatWindow()
         {
             EventManager.ReportOnGoodWindowEnd();
-            audio2.Play();
         }
         private void EndOKBeatWindow()
         {
             EventManager.ReportOnOKWindowEnd();
-            audio3.Play();
         }
-        private void PlayLastSound() => audio2.Play();
+        private void PlaySound(AudioSource _src) => _src.Play();
 
         #region OnEnable/OnDisable
         private void OnEnable()
