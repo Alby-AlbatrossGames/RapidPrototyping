@@ -155,11 +155,11 @@ namespace Prototype4
 
             ExecuteAfterFrames(3, () =>
             {
-                TweenX.TweenNumbers(perfectCountTXT, 99f, (float)perfectCount, 1f, Ease.InCubic, "F0" , true);
-                TweenX.TweenNumbers(goodCountTXT, 99f, (float)goodCount, 1f, Ease.InCubic, "F0", true);
-                TweenX.TweenNumbers(okCountTXT, 99f, (float)okCount, 1f, Ease.InCubic, "F0", true);
-                TweenX.TweenNumbers(missCountTXT, 99f, (float)missCount, 1f, Ease.InCubic, "F0", true);
-                TweenX.TweenNumbers(scoreTXT, 999f, (float)score, 1.5f, Ease.InCubic, "F0", true);
+                TweenX.TweenNumbers(perfectCountTXT, 99f, (float)perfectCount, 0.5f, Ease.InCubic, "F0" , true);
+                TweenX.TweenNumbers(goodCountTXT, 99f, (float)goodCount, 0.8f, Ease.InCubic, "F0", true);
+                TweenX.TweenNumbers(okCountTXT, 99f, (float)okCount, 1.1f, Ease.InCubic, "F0", true);
+                TweenX.TweenNumbers(missCountTXT, 99f, (float)missCount, 1.4f, Ease.InCubic, "F0", true);
+                TweenX.TweenNumbers(scoreTXT, 999f, (float)score, 1.7f, Ease.InCubic, "F0", true);
             });
         }
 
